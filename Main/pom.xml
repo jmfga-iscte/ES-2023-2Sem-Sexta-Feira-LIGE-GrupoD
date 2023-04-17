@@ -3,14 +3,15 @@
   <groupId>pt.iscte-iul.ista</groupId>
   <artifactId>Projeto_ES</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  	<dependencies>
+    	<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.14.2</version>
+		</dependency>
+	</dependencies>
   <build>
     <sourceDirectory>src</sourceDirectory>
-  <dependency>
-    <groupId>com.fasterxml.jackson.core</groupId>
-    <artifactId>jackson-databind</artifactId>
-    <version>2.14.2</version>
-  </dependency>
-
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>

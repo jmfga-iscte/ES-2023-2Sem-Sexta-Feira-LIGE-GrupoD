@@ -10,9 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 public class Horario {
     private static final ObjectMapper objectMapper = new ObjectMapper();
-
+    
 
     public static void carregar(String caminho) throws IOException {
         String extensao = caminho.substring(caminho.lastIndexOf('.') + 1);
@@ -45,14 +46,14 @@ public class Horario {
             else if (valores.length < 11) {
                 String[] valoresPreenchidos = new String[11];
                 for (int i = 0; i < valores.length; i++) {
-                    valoresPreenchidos[i] = valores[i].trim();
+                    valoresPreenchidos[i] = valores[i];
                 }
                 for (int i = valores.length; i < 11; i++) {
                     valoresPreenchidos[i] = "";
                 }
                 valores = valoresPreenchidos;
             }
-
+            
             Aula aula = new Aula();
             aula.setCurso(valores[0]);
             aula.setUnidadeCurricular(valores[1]);
@@ -77,7 +78,9 @@ public class Horario {
         if (!file.exists()) {
         throw new FileNotFoundException("Arquivo não encontrado: " + filePath);
     }
+        objectMapper.registerModule(new JavaTimeModule());
         return objectMapper.readValue(file, HorarioCarregado.class); // ler objeto HorarioCarregado a partir do arquivo JSON
+
     }
 
     private void gravarCsv(){
@@ -93,6 +96,14 @@ public class Horario {
     }
     
     public static void main(String[] args) throws IOException {
-    	carregar("C:/users/Diogo/Desktop/a/horario_exemplo.csv");
+    	
+        //Teste para carregarCsv
+        //carregar("C:/users/Diogo/Desktop/a/horario_exemplo.csv");
+        
+        
+        //Teste para carregarCsv
+        //HorarioCarregado horario = carregarJson("C:/users/Diogo/Desktop/a/horario_exemplo.json");
+        //System.out.println(horario.getAulas().get(1).getdiaDaSemana());
+        
     }
 }

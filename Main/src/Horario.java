@@ -37,22 +37,34 @@ public class Horario {
         linhas.remove(0);
     
         for (String linha : linhas) {
-            String[] valores = linha.split(",");
-            if (valores.length != 11) {
+            String[] valores = linha.split(";");
+            
+            if (valores.length > 11) {
                 throw new IllegalArgumentException("O arquivo está mal formatado.");
             }
+            else if (valores.length < 11) {
+                String[] valoresPreenchidos = new String[11];
+                for (int i = 0; i < valores.length; i++) {
+                    valoresPreenchidos[i] = valores[i].trim();
+                }
+                for (int i = valores.length; i < 11; i++) {
+                    valoresPreenchidos[i] = "";
+                }
+                valores = valoresPreenchidos;
+            }
+
             Aula aula = new Aula();
-            aula.setCurso(valores[0].trim());
-            aula.setUnidadeCurricular(valores[1].trim());
-            aula.setTurno(valores[2].trim());
-            aula.setTurma(valores[3].trim());
-            aula.setInscritosNoTurno(Integer.parseInt(valores[4].trim()));
-            aula.setdiaDaSemana(valores[5].trim());
-            aula.setHoraInicio(LocalTime.parse(valores[6].trim()));
-            aula.setHoraFim(LocalTime.parse(valores[7].trim()));
-            aula.setDataAula(LocalDate.parse(valores[8].trim(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-            aula.setSala(valores[9].trim());
-            aula.setLotacaoDaSala(Integer.parseInt(valores[10].trim()));
+            aula.setCurso(valores[0]);
+            aula.setUnidadeCurricular(valores[1]);
+            aula.setTurno(valores[2]);
+            aula.setTurma(valores[3]);
+            aula.setInscritosNoTurno(Integer.parseInt(valores[4]));
+            aula.setdiaDaSemana(valores[5]);
+            aula.setHoraInicio(valores[6].isEmpty() ? null : LocalTime.parse(valores[6]));
+            aula.setHoraFim(valores[7].isEmpty() ? null :LocalTime.parse(valores[7]));
+            aula.setDataAula(valores[8].isEmpty() ? null : LocalDate.parse(valores[8], DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+            aula.setSala(valores[9].isEmpty() ? null :valores[9]);
+            aula.setLotacaoDaSala(valores[10].isEmpty() ? 0 : Integer.parseInt(valores[10]));
 
             aulas.add(aula);
         }

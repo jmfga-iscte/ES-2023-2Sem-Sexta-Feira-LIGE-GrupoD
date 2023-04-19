@@ -96,14 +96,6 @@ public class Horario {
     }
     
     public static void main(String[] args) throws IOException {
-    	
-        //Teste para carregarCsv
-        //carregar("C:/users/Diogo/Desktop/a/horario_exemplo.csv");
-        
-        
-        //Teste para carregarCsv
-        //HorarioCarregado horario = carregarJson("C:/users/Diogo/Desktop/a/horario_exemplo.json");
-        //System.out.println(horario.getAulas().get(1).getdiaDaSemana());
         
     }
 }

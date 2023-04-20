@@ -80,18 +80,6 @@ public class Horario {
         }
         return objectMapper.readValue(file, HorarioCarregado.class); // ler objeto HorarioCarregado a partir do arquivo JSON
     }
-
-//    private void gravarCsv(){
-//
-//    }
-//
-//    private void gravarJson(){
-//
-//    }
-//    
-//    private void converterFicheiro() {
-//    	
-//    }
     
     public static void main(String[] args) throws IOException {
 //    	carregar("C:/users/Diogo/Desktop/a/horario_exemplo.csv");

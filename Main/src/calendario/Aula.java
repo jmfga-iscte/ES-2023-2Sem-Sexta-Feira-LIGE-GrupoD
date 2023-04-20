@@ -16,27 +16,9 @@ public class Aula {
     private int lotacaoDaSala;
 
 
-//    public Aula(){
-//
-//    }
-    
-//    public Aula(String curso, String unidadeCurricular, 
-//    		String turno, String turma, 
-//    		int inscritosNoTurno, String diaDaSemana, 
-//    		LocalTime horaInicio, LocalTime horaFim, 
-//    		LocalDate data ,String sala, int lotacaoDaSala) {
-//        this.curso = curso;
-//        this.unidadeCurricular = unidadeCurricular;
-//        this.turno = turno;
-//        this.turma = turma;
-//        this.inscritosNoTurno = inscritosNoTurno;
-//        this.diaDaSemana = diaDaSemana;
-//        this.horaInicio = horaInicio;
-//        this.horaFim = horaFim;
-//        this.data=data;
-//        this.sala = sala;
-//        this.lotacaoDaSala = lotacaoDaSala;
-//    }
+    public Aula(){
+
+    }
 
     public String getCurso() {
         return curso;

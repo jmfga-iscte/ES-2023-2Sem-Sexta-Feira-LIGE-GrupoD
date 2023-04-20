@@ -15,5 +15,4 @@ public class HorarioCarregado {
    public void setAulas(List<Aula> aulas) {
       this.aulas = aulas;
    }
-
 }

@@ -16,7 +16,9 @@ public class Aula {
 
 
     public Aula(){
-      // TODO document why this constructor is empty - "Usamos o setter para definir os valores, seria também um erro usar um construtor com 11 parâmetros
+    
+      // TODO document why this constructor is empty - "Usamos o setter para definir os valores, seria tambem um erro usar um construtor com 11 parametros
+
     }
     
 

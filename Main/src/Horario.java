@@ -22,19 +22,19 @@ public class Horario {
         } else if (extensao.equalsIgnoreCase("csv")) {
             carregarCsv(caminho);
         } else {
-            throw new IllegalArgumentException("Formato de arquivo inválido: " + extensao);
+            throw new IllegalArgumentException("Formato de arquivo invï¿½lido: " + extensao);
         }
     }
 
 	public static HorarioCarregado carregarCsv(String caminhoArquivo) throws IOException {
         List<String> linhas = Files.readAllLines(Paths.get(caminhoArquivo));
         if (linhas.isEmpty()) {
-            throw new IllegalArgumentException("O arquivo está vazio.");
+            throw new IllegalArgumentException("O arquivo estï¿½ vazio.");
         }
         List<Aula> aulas = new ArrayList<>();
         HorarioCarregado horario = new HorarioCarregado(aulas);
     
-        // Descarta a primeira linha (cabeçalho)
+        // Descarta a primeira linha (cabeï¿½alho)
         linhas.remove(0);
     
         for (String linha : linhas) {
@@ -60,26 +60,28 @@ public class Horario {
     }
 
     public static String[] preencherValores(String[] valores) {
-    if (valores.length > 11) {
-        throw new IllegalArgumentException("O arquivo está mal formatado.");
-    }
-    else if (valores.length < 11) {
-        String[] valoresPreenchidos = new String[11];
-        for (int i = 0; i < valores.length; i++) {
-            valoresPreenchidos[i] = valores[i];
-        }
-        for (int i = valores.length; i < 11; i++) {
-            valoresPreenchidos[i] = "";
-        }
-        valores = valoresPreenchidos;
-    }
-    return valores;
+      if (valores.length > 11) {
+
+        throw new IllegalArgumentException("O arquivo esta mal formatado.");
+
+      }
+      else if (valores.length < 11) {
+          String[] valoresPreenchidos = new String[11];
+          for (int i = 0; i < valores.length; i++) {
+              valoresPreenchidos[i] = valores[i];
+          }
+          for (int i = valores.length; i < 11; i++) {
+              valoresPreenchidos[i] = "";
+          }
+          valores = valoresPreenchidos;
+      }
+      return valores;
 }
 
     public static HorarioCarregado carregarJson(String filePath) throws IOException {
         File file = new File(filePath);
         if (!file.exists()) {
-        throw new FileNotFoundException("Arquivo não encontrado: " + filePath);
+        throw new FileNotFoundException("Arquivo nao encontrado: " + filePath);
     }
         objectMapper.registerModule(new JavaTimeModule());
         return objectMapper.readValue(file, HorarioCarregado.class); // ler objeto HorarioCarregado a partir do arquivo JSON

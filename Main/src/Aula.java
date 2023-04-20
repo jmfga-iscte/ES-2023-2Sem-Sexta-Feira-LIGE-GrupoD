@@ -16,8 +16,9 @@ public class Aula {
 
 
     public Aula(){
-
+      // TODO document why this constructor is empty - "Usamos o setter para definir os valores, seria também um erro usar um construtor com 11 parâmetros
     }
+    
 
     public String getCurso() {
         return curso;
@@ -105,5 +106,7 @@ public class Aula {
 
     public void setLotacaoDaSala(int lotacaoDaSala) {
         this.lotacaoDaSala = lotacaoDaSala;
-    } 
+    }
+
+    
 }

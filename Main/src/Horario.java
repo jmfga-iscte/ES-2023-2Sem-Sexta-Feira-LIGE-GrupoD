@@ -38,21 +38,7 @@ public class Horario {
         linhas.remove(0);
     
         for (String linha : linhas) {
-            String[] valores = linha.split(";");
-            
-            if (valores.length > 11) {
-                throw new IllegalArgumentException("O arquivo está mal formatado.");
-            }
-            else if (valores.length < 11) {
-                String[] valoresPreenchidos = new String[11];
-                for (int i = 0; i < valores.length; i++) {
-                    valoresPreenchidos[i] = valores[i];
-                }
-                for (int i = valores.length; i < 11; i++) {
-                    valoresPreenchidos[i] = "";
-                }
-                valores = valoresPreenchidos;
-            }
+            String[] valores = preencherValores(linha.split(";"));
             
             Aula aula = new Aula();
             aula.setCurso(valores[0]);
@@ -72,6 +58,23 @@ public class Horario {
         horario.setAulas(aulas);
         return horario;
     }
+
+    public static String[] preencherValores(String[] valores) {
+    if (valores.length > 11) {
+        throw new IllegalArgumentException("O arquivo está mal formatado.");
+    }
+    else if (valores.length < 11) {
+        String[] valoresPreenchidos = new String[11];
+        for (int i = 0; i < valores.length; i++) {
+            valoresPreenchidos[i] = valores[i];
+        }
+        for (int i = valores.length; i < 11; i++) {
+            valoresPreenchidos[i] = "";
+        }
+        valores = valoresPreenchidos;
+    }
+    return valores;
+}
 
     public static HorarioCarregado carregarJson(String filePath) throws IOException {
         File file = new File(filePath);

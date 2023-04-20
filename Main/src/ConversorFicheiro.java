@@ -32,9 +32,6 @@ public class ConversorFicheiro {
 			JSONArray doc = jsonObject.getJSONArray("test");
 			File file = new File(CSVPath);
 			String csvString = CDL.toString(doc);
-//			String csvString2 = csvString.replace(',', ';');
-//			System.out.println(csvString2);
-//			FileUtils.writeStringToFile(file, csvString2);
 			FileUtils.writeStringToFile(file, csvString);
 			scanner.close();
 		} catch (IOException e) {
@@ -65,11 +62,7 @@ public class ConversorFicheiro {
 			ObjectMapper jsonMapper = new ObjectMapper();
 			jsonMapper.enable(SerializationFeature.INDENT_OUTPUT); 
 			// Escreva a lista de mapas como um arquivo JSON
-			try {
-				jsonMapper.writerWithDefaultPrettyPrinter().writeValue(new File(JSONPath), data);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			jsonMapper.writerWithDefaultPrettyPrinter().writeValue(new File(JSONPath), data);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -77,11 +70,6 @@ public class ConversorFicheiro {
 	}
 
 	public static void main(String[] args) {
-//		convertJsonToCsv();
-		try {
-			convertCsvToJson();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		convertJsonToCsv();
 	}
 }

@@ -8,7 +8,6 @@ public class HorarioCarregado {
       this.aulas = aulas;
    }
    
-  
    public List<Aula> getAulas() {
       return aulas;
    }

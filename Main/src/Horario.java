@@ -76,15 +76,15 @@ public class Horario {
           valores = valoresPreenchidos;
       }
       return valores;
-}
+    }
 
     public static HorarioCarregado carregarJson(String filePath) throws IOException {
-        File file = new File(filePath);
-        if (!file.exists()) {
-        throw new FileNotFoundException("Arquivo nao encontrado: " + filePath);
-    }
-        objectMapper.registerModule(new JavaTimeModule());
-        return objectMapper.readValue(file, HorarioCarregado.class); // ler objeto HorarioCarregado a partir do arquivo JSON
+    	File file = new File(filePath);
+    	if (!file.exists()) {
+    		throw new FileNotFoundException("Arquivo nao encontrado: " + filePath);
+    	}
+    	objectMapper.registerModule(new JavaTimeModule());
+    	return objectMapper.readValue(file, HorarioCarregado.class); // ler objeto HorarioCarregado a partir do arquivo JSON
 
     }
 

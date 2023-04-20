@@ -1,4 +1,3 @@
-package calendario;
 import java.util.List;
 
 public class HorarioCarregado {

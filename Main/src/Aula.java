@@ -16,23 +16,9 @@ public class Aula {
 
 
     public Aula(){
-
+      // TODO document why this constructor is empty - "Usamos o setter para definir os valores, seria também um erro usar um construtor com 11 parâmetros
     }
     
-    public Aula(String curso, String unidadeCurricular, String turno, String turma, int inscritosNoTurno,
-                String diaDaSemana, LocalTime horaInicio, LocalTime horaFim,LocalDate data ,String sala, int lotacaoDaSala) {
-        this.curso = curso;
-        this.unidadeCurricular = unidadeCurricular;
-        this.turno = turno;
-        this.turma = turma;
-        this.inscritosNoTurno = inscritosNoTurno;
-        this.diaDaSemana = diaDaSemana;
-        this.horaInicio = horaInicio;
-        this.horaFim = horaFim;
-        this.data=data;
-        this.sala = sala;
-        this.lotacaoDaSala = lotacaoDaSala;
-    }
 
     public String getCurso() {
         return curso;

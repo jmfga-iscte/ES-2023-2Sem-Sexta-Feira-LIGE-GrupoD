@@ -75,24 +75,25 @@ public class Horario {
     public static HorarioCarregado carregarJson(String filePath) throws IOException {
         File file = new File(filePath);
         if (!file.exists()) {
-        throw new FileNotFoundException("Arquivo n√£o encontrado: " + filePath);
-    }
+        	throw new FileNotFoundException("Arquivo n√£o encontrado: " + filePath);
+        }
         return objectMapper.readValue(file, HorarioCarregado.class); // ler objeto HorarioCarregado a partir do arquivo JSON
     }
 
-    private void gravarCsv(){
-
-    }
-
-    private void gravarJson(){
-
-    }
-    
-    private void converterFicheiro() {
-    	
-    }
+//    private void gravarCsv(){
+//
+//    }
+//
+//    private void gravarJson(){
+//
+//    }
+//    
+//    private void converterFicheiro() {
+//    	
+//    }
     
     public static void main(String[] args) throws IOException {
-    	carregar("C:/users/Diogo/Desktop/a/horario_exemplo.csv");
+//    	carregar("C:/users/Diogo/Desktop/a/horario_exemplo.csv");
+//    	carregar("E:\\IGE\\3∫Ano_2∫Semestre\\EngenhariaSoftware\\Exemplos_Ficheiro\\horario_exemplo.csv");
     }
 }

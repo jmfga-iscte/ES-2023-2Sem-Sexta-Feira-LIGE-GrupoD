@@ -1,3 +1,4 @@
+package horario;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.File;
@@ -11,6 +12,8 @@ import org.junit.jupiter.api.Test;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import horario.ConversorFicheiro;
 
 class ConversorFicheiroTest {
 	

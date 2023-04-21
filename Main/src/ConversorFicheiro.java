@@ -16,8 +16,26 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 
+/**
+ * Representa um conversor de ficheiros, seja para converter de JSON para CSV e vice-versa.
+ */
 public class ConversorFicheiro {
-	
+
+	/**
+	 * Este método converte um ficheiro JSON num ficheiro CSV e guarda o mesmo num local
+	 * especificado pelo utilizador.
+	 * 
+	 * Para converter o ficheiro, o utilizador deve fornecer o caminho completo do
+	 * ficheiro JSON que deseja converter e o caminho completo onde deseja guardar o
+	 * ficheiro CSV resultante.
+	 *
+	 * O método usa a biblioteca JSON-java para analisar o ficheiro JSON e a
+	 * biblioteca Apache Commons CSV para converter o objeto JSON numa string CSV.
+	 *
+	 * @throws IOException   se o ficheiro JSON não puder ser encontrado ou se houver
+	 *                       um erro ao escrever o ficheiro CSV.
+	 * @throws JSONException se ocorrer algum erro ao analisar o ficheiro JSON.
+	 */
 	public static void convertJsonToCsv() {
 		String jsonString;
 		JSONObject jsonObject;
@@ -42,7 +60,14 @@ public class ConversorFicheiro {
 			System.out.println("Algum erro a ler o JSON.");
 		}
 	}
-	
+
+	/**
+	 * Converte um ficheiro CSV num ficheiro JSON. Este método lê um ficheiro CSV do
+	 * caminho especificado pelo utilizador e converte o mesmo num ficheiro JSON, que é
+	 * guardado no caminho especificado pelo utilizador.
+	 * 
+	 * @throws IOException se ocorrer um erro ao ler ou escrever um ficheiro
+	 */
 	public static void convertCsvToJson() throws IOException {
 		Scanner scanner = new Scanner(System.in);
 		System.out.print("Insira aqui o path do ficheiro que quer converter: ");
@@ -60,7 +85,7 @@ public class ConversorFicheiro {
 			data = csvMapper.readerFor(Map.class).with(schema).readValues(new File(CSVPath)).readAll();
 			// Crie um objeto ObjectMapper para escrever o arquivo JSON
 			ObjectMapper jsonMapper = new ObjectMapper();
-			jsonMapper.enable(SerializationFeature.INDENT_OUTPUT); 
+			jsonMapper.enable(SerializationFeature.INDENT_OUTPUT);
 			// Escreva a lista de mapas como um arquivo JSON
 			jsonMapper.writerWithDefaultPrettyPrinter().writeValue(new File(JSONPath), data);
 		} catch (IOException e) {

@@ -129,7 +129,7 @@ public class Horario {
 		}
 		objectMapper.registerModule(new JavaTimeModule());
 		return objectMapper.readValue(file, HorarioCarregado.class); // ler objeto HorarioCarregado a partir do ficheiro
-																		// // JSON
+																	// JSON
 	}
 
 	public static void main(String[] args) throws IOException {

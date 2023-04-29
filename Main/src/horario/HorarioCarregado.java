@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * 
- * Classe responsável por armazenar um horário carregado a partir de ficheiros
+ * Classe responsavel por armazenar um horario carregado a partir de ficheiros
  * JSON ou CSV.
  */
 public class HorarioCarregado {
@@ -14,7 +14,7 @@ public class HorarioCarregado {
 	 * 
 	 * Construtor da classe HorarioCarregado.
 	 * 
-	 * @param aulas Lista de aulas a serem armazenadas no horário.
+	 * @param aulas Lista de aulas a serem armazenadas no horario.
 	 */
 	public HorarioCarregado(@JsonProperty("aulas") List<Aula> aulas) {
 		this.aulas = aulas;
@@ -22,7 +22,7 @@ public class HorarioCarregado {
 
 	/**
 	 * 
-	 * Método para obter a lista de aulas armazenadas no horário.
+	 * Mï¿½todo para obter a lista de aulas armazenadas no horario.
 	 * 
 	 * @return Lista de aulas.
 	 */
@@ -32,7 +32,7 @@ public class HorarioCarregado {
 
 	/**
 	 * 
-	 * Método para definir a lista de aulas a serem armazenadas no horário.
+	 * Metodo para definir a lista de aulas a serem armazenadas no horario.
 	 * 
 	 * @param aulas Lista de aulas.
 	 */

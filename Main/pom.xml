@@ -3,6 +3,8 @@
   <groupId>pt.iscte-iul.ista</groupId>
   <artifactId>Projeto_ES</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  <packaging>war</packaging>
+
   	<dependencies>
     	<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
@@ -17,7 +19,7 @@
 		<dependency>
     		<groupId>org.json</groupId>
     		<artifactId>json</artifactId>
-    		<version>20220924</version>
+    		<version>20230227</version>
 		</dependency>
 		<dependency>
 		    <groupId>commons-io</groupId>
@@ -34,6 +36,14 @@
 		    <artifactId>jackson-core</artifactId>
 		    <version>2.14.2</version>
 		</dependency>
+		<dependency>
+		<groupId>jakarta.servlet</groupId>
+		<artifactId>jakarta.servlet-api</artifactId>
+		<version>6.0.0</version>
+		<scope>provided</scope>
+		</dependency>
+
+
 	</dependencies>
   <build>
     <sourceDirectory>src</sourceDirectory>
@@ -45,6 +55,14 @@
           <release>16</release>
         </configuration>
       </plugin>
+		<plugin>
+		<groupId>org.apache.maven.plugins</groupId>
+		<artifactId>maven-war-plugin</artifactId>
+		<version>3.2.3</version>
+		<configuration>
+			<webXml>src/main/webapp/WEB-INF/web.xml</webXml>
+		</configuration>
+    </plugin>
     </plugins>
   </build>
 </project>

@@ -9,6 +9,8 @@ import javax.swing.JFileChooser;
 
 public class MainPanel extends JPanel{
 
+		private HorarioCarregado carregado=null;
+	
 	    public MainPanel() {
 	        setLayout(new GridLayout(4, 2));
 	        JButton button1 = new JButton("Carregar horário");
@@ -25,10 +27,9 @@ public class MainPanel extends JPanel{
 	                    String s = selectedFile.getAbsolutePath();
 	                    System.out.println("Selected file: " + s);
 	                    try {
-							Horario.carregar(s);
+							carregado = Horario.carregar(s);
 							System.out.println();
 						} catch (IOException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 	                }
@@ -36,9 +37,28 @@ public class MainPanel extends JPanel{
 	        });
 
 	        button2.addActionListener(new ActionListener() {
-	            public void actionPerformed(ActionEvent e) {
-//	                OtherClass.function2();
-	            }
+	        	public void actionPerformed(ActionEvent e) {
+	        		if(!(carregado == null)){
+	        			JFileChooser fileChooser = new JFileChooser();
+	        			fileChooser.setDialogTitle("Escolha a diretoria onde deseja salvar o arquivo");
+	        			fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+	        			int result = fileChooser.showSaveDialog(null);
+	        			if (result == JFileChooser.APPROVE_OPTION) {
+	        			    File selectedDirectory = fileChooser.getSelectedFile();
+	        			    String selectedPath = selectedDirectory.getAbsolutePath();
+	        			    // use o caminho selecionado para salvar o arquivo
+	        			    String pathOrigem = carregado.getPath();
+	        			    try {
+								ConversorFicheiro.convertFile(selectedPath, pathOrigem);
+								System.out.println("Sucesso!");
+							} catch (IOException e1) {
+								e1.printStackTrace();
+							}
+	        			}
+	        		} else {
+	        			System.out.println("Ainda nao carregou nenhum horario!");
+	        		}
+	        	}
 	        });
 
 	        button3.addActionListener(new ActionListener() {

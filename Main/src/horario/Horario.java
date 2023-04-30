@@ -11,12 +11,52 @@ import java.util.List;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
+
 /**
  * Representa um horario carregado a partir de um ficheiro JSON ou CSV.
  */
 
-public class Horario {
+ @MultipartConfig(
+  fileSizeThreshold = 1024 * 1024 * 10,  // 10 MB
+  maxFileSize = 1024 * 1024 * 50,        // 50 MB
+  maxRequestSize = 1024 * 1024 * 100     // 100 MB
+)
+
+public class Horario extends HttpServlet{
+	private static final long serialVersionUID = 1L;
 	private static final ObjectMapper objectMapper = new ObjectMapper();
+
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		Part filePart = request.getPart("arquivo");
+		String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+		String caminhoArquivo = "C:/Users/Diogo/Desktop/a/" + fileName;
+
+		if(fileName.isEmpty()) {
+			request.setAttribute("mensagem", "Caminho do arquivo inválido.");
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+			return;
+		}
+		
+		try {
+			HorarioCarregado horario = carregar(caminhoArquivo);
+			request.setAttribute("horario", horario);
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		} catch(IOException e) {
+			request.setAttribute("mensagem", "Erro ao carregar arquivo.");
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		}
+	}
+	
+
+
 
 	/**
 	 * Carrega um ficheiro de dados JSON ou CSV a partir do caminho especificado.
@@ -28,16 +68,18 @@ public class Horario {
 	 * @throws IOException              se ocorrer um erro ao ler o ficheiro.
 	 * @throws IllegalArgumentException se a extensao do ficheiro for invalida.
 	 */
+
+
+	 
 	public static HorarioCarregado carregar(String caminho) throws IOException {
 		String extensao = caminho.substring(caminho.lastIndexOf('.') + 1);
 		if (extensao.equalsIgnoreCase("json")) {
-			carregarJson(caminho);
+			return carregarJson(caminho);
 		} else if (extensao.equalsIgnoreCase("csv")) {
-			carregarCsv(caminho);
+			return carregarCsv(caminho);
 		} else {
 			throw new IllegalArgumentException("Formato de arquivo invalido: " + extensao);
 		}
-		return null;
 	}
 
 	/**
@@ -51,7 +93,8 @@ public class Horario {
 	 *                                  do ficheiro.
 	 * @throws IllegalArgumentException Se o ficheiro estiver vazio.
 	 */
-	public static HorarioCarregado carregarCsv(String caminhoFicheiro) throws IOException {
+
+	 public static HorarioCarregado carregarCsv(String caminhoFicheiro) throws IOException {
 		List<String> linhas = Files.readAllLines(Paths.get(caminhoFicheiro));
 		if (linhas.isEmpty()) {
 			throw new IllegalArgumentException("O arquivo esta vazio.");
@@ -80,6 +123,7 @@ public class Horario {
 			aulas.add(aula);
 		}
 		horario.setAulas(aulas);
+		System.out.println(horario.getAulas().get(0).getdiaDaSemana());
 		return horario;
 	}
 

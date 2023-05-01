@@ -2,21 +2,36 @@ package horario;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Representa uma aula associada a um determinado curso, unidade curricular e turno.
  */
 public class Aula {
-	private String curso;
-	private String unidadeCurricular;
-	private String turno;
-	private String turma;
-	private int inscritosNoTurno;
-	private String diaDaSemana;
-	private LocalTime horaInicio;
-	private LocalTime horaFim;
-	private LocalDate data;
-	private String sala;
-	private int lotacaoDaSala;
+	@JsonProperty("Curso")
+	private String Curso;
+	@JsonProperty("Unidade Curricular")
+	private String UnidadeCurricular;
+	@JsonProperty("Turno")
+	private String Turno;
+	@JsonProperty("Turma")
+	private String Turma;
+	@JsonProperty("Inscritos no turno")
+	private int InscritosNoTurno;
+	@JsonProperty("Dia da semana")
+	private String DiaDaSemana;
+	@JsonProperty("Hora início da aula")
+	private LocalTime HoraInicio;
+	@JsonProperty("Hora fim da aula")
+	private LocalTime HoraFim;
+	@JsonProperty("Data da aula")
+	@JsonFormat(pattern = "dd/MM/yyyy")
+	private LocalDate Data;
+	@JsonProperty("Sala atribuída à aula")
+	private String Sala;
+	@JsonProperty("Lotação da sala")
+	private int LotacaoDaSala;
 
 	/**
 	 * Cria uma nova instância de Aula com valores padrão. Os valores padrão devem
@@ -35,7 +50,7 @@ public class Aula {
 	 * @return o nome do curso
 	 */
 	public String getCurso() {
-		return curso;
+		return Curso;
 	}
 
 	/**
@@ -44,7 +59,7 @@ public class Aula {
 	 * @param curso o nome do curso
 	 */
 	public void setCurso(String curso) {
-		this.curso = curso;
+		this.Curso = curso;
 	}
 
 	/**
@@ -53,7 +68,7 @@ public class Aula {
 	 * @return o nome da unidade curricular
 	 */
 	public String getUnidadeCurricular() {
-		return unidadeCurricular;
+		return UnidadeCurricular;
 	}
 
 	/**
@@ -62,7 +77,7 @@ public class Aula {
 	 * @param unidadeCurricular o nome da unidade curricular
 	 */
 	public void setUnidadeCurricular(String unidadeCurricular) {
-		this.unidadeCurricular = unidadeCurricular;
+		this.UnidadeCurricular = unidadeCurricular;
 	}
 
 	/**
@@ -71,7 +86,7 @@ public class Aula {
 	 * @return o nome do turno
 	 */
 	public String getTurno() {
-		return turno;
+		return Turno;
 	}
 
 	/**
@@ -80,7 +95,7 @@ public class Aula {
 	 * @param turno o nome do turno
 	 */
 	public void setTurno(String turno) {
-		this.turno = turno;
+		this.Turno = turno;
 	}
 
 	/**
@@ -89,7 +104,7 @@ public class Aula {
 	 * @return o nome da turma
 	 */
 	public String getTurma() {
-		return turma;
+		return Turma;
 	}
 
 	/**
@@ -98,7 +113,7 @@ public class Aula {
 	 * @param turma o nome da turma
 	 */
 	public void setTurma(String turma) {
-		this.turma = turma;
+		this.Turma = turma;
 	}
 
 	/**
@@ -107,7 +122,7 @@ public class Aula {
 	 * @return o número de alunos inscritos no turno
 	 */
 	public int getInscritosNoTurno() {
-		return inscritosNoTurno;
+		return InscritosNoTurno;
 	}
 
 	/**
@@ -116,7 +131,7 @@ public class Aula {
 	 * @param inscritosNoTurno o número de alunos inscritos no turno
 	 */
 	public void setInscritosNoTurno(int inscritosNoTurno) {
-		this.inscritosNoTurno = inscritosNoTurno;
+		this.InscritosNoTurno = inscritosNoTurno;
 	}
 
 	/**
@@ -125,7 +140,7 @@ public class Aula {
 	 * @return o dia da semana da aula
 	 */
 	public String getdiaDaSemana() {
-		return diaDaSemana;
+		return DiaDaSemana;
 	}
 
 	/**
@@ -134,7 +149,7 @@ public class Aula {
 	 * @param dia O dia da semana da aula.
 	 */
 	public void setdiaDaSemana(String dia) {
-		this.diaDaSemana = dia;
+		this.DiaDaSemana = dia;
 	}
 
 	/**
@@ -143,7 +158,7 @@ public class Aula {
 	 * @return A hora de início da aula.
 	 */
 	public LocalTime getHoraInicio() {
-		return horaInicio;
+		return HoraInicio;
 	}
 
 	/**
@@ -152,7 +167,7 @@ public class Aula {
 	 * @param horaInicio A hora de início da aula.
 	 */
 	public void setHoraInicio(LocalTime horaInicio) {
-		this.horaInicio = horaInicio;
+		this.HoraInicio = horaInicio;
 	}
 
 	/**
@@ -161,7 +176,7 @@ public class Aula {
 	 * @return A hora de fim da aula.
 	 */
 	public LocalTime getHoraFim() {
-		return horaFim;
+		return HoraFim;
 	}
 
 	/**
@@ -170,7 +185,7 @@ public class Aula {
 	 * @param horaFim A hora de fim da aula.
 	 */
 	public void setHoraFim(LocalTime horaFim) {
-		this.horaFim = horaFim;
+		this.HoraFim = horaFim;
 	}
 
 	/**
@@ -179,7 +194,7 @@ public class Aula {
 	 * @return A data da aula.
 	 */
 	public LocalDate getdData() {
-		return data;
+		return Data;
 	}
 
 	/**
@@ -188,7 +203,7 @@ public class Aula {
 	 * @param data A data da aula.
 	 */
 	public void setDataAula(LocalDate data) {
-		this.data = data;
+		this.Data = data;
 	}
 
 	/**
@@ -197,7 +212,7 @@ public class Aula {
 	 * @return O nome da sala em que a aula será realizada.
 	 */
 	public String getSala() {
-		return sala;
+		return Sala;
 	}
 
 	/**
@@ -206,7 +221,7 @@ public class Aula {
 	 * @param sala O nome da sala em que a aula será realizada.
 	 */
 	public void setSala(String sala) {
-		this.sala = sala;
+		this.Sala = sala;
 	}
 
 	/**
@@ -215,7 +230,7 @@ public class Aula {
 	 * @return A lotação da sala em que a aula será realizada.
 	 */
 	public int getLotacaoDaSala() {
-		return lotacaoDaSala;
+		return LotacaoDaSala;
 	}
 
 	/**
@@ -224,6 +239,6 @@ public class Aula {
 	 * @param lotacaoDaSala A lotação da sala em que a aula será realizada.
 	 */
 	public void setLotacaoDaSala(int lotacaoDaSala) {
-		this.lotacaoDaSala = lotacaoDaSala;
+		this.LotacaoDaSala = lotacaoDaSala;
 	}
 }

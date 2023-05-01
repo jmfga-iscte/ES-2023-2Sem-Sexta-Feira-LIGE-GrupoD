@@ -139,10 +139,9 @@ public class Horario {
 //		HorarioCarregado hc = new HorarioCarregado();
 //		hc.setPath(filePath);
 		objectMapper.registerModule(new JavaTimeModule());
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-		objectMapper.setDateFormat(dateFormat);
-		objectMapper.readValue(file, HorarioCarregado.class); 
-		HorarioCarregado hc= objectMapper.readValue(file, HorarioCarregado.class);
+		objectMapper.readValue(file, HorarioCarregado.class);
+		HorarioCarregado hc = objectMapper.readValue(file, HorarioCarregado.class);
+		hc.setPath(filePath);
 		System.out.println("yes");
 		return hc;
 	}

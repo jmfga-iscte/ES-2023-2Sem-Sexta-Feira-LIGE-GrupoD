@@ -1,7 +1,6 @@
 package horario;
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.time.LocalDate;
 import java.time.LocalTime;
 
 import org.junit.jupiter.api.Test;
@@ -32,8 +31,8 @@ class AulaTest {
                 assertEquals(LocalTime.of(13,0,0), aula.getHoraInicio());
                 aula.setHoraFim(LocalTime.of(14,30,0));
                 assertEquals(LocalTime.of(14,30,0), aula.getHoraFim());
-                aula.setDataAula(LocalDate.of(2022,12,2));
-                assertEquals(LocalDate.of(2022,12,2), aula.getdData());
+                aula.setDataAula("2/12/2022");
+                assertEquals("2/12/2022", aula.getdData());
                 aula.setSala("AA2.25");
                 assertEquals("AA2.25", aula.getSala());
                 aula.setLotacaoDaSala(34);

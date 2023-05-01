@@ -28,17 +28,17 @@ import com.fasterxml.jackson.databind.MappingIterator;
 public class ConversorFicheiro {
 
 	/**
-	 * Este método converte um ficheiro JSON num ficheiro CSV e guarda o mesmo num local
+	 * Este metodo converte um ficheiro JSON num ficheiro CSV e guarda o mesmo num local
 	 * especificado pelo utilizador.
 	 * 
 	 * Para converter o ficheiro, o utilizador deve fornecer o caminho completo do
 	 * ficheiro JSON que deseja converter e o caminho completo onde deseja guardar o
 	 * ficheiro CSV resultante.
 	 *
-	 * O método usa a biblioteca JSON-java para analisar o ficheiro JSON e a
+	 * O mï¿½todo usa a biblioteca JSON-java para analisar o ficheiro JSON e a
 	 * biblioteca Apache Commons CSV para converter o objeto JSON numa string CSV.
 	 *
-	 * @throws IOException   se o ficheiro JSON não puder ser encontrado ou se houver
+	 * @throws IOException   se o ficheiro JSON nao puder ser encontrado ou se houver
 	 *                       um erro ao escrever o ficheiro CSV.
 	 * @throws JSONException se ocorrer algum erro ao analisar o ficheiro JSON.
 	 * 
@@ -96,8 +96,8 @@ public class ConversorFicheiro {
 		}
 	}
 	/**
-	 * Converte um ficheiro CSV num ficheiro JSON. Este método lê um ficheiro CSV do
-	 * caminho especificado pelo utilizador e converte o mesmo num ficheiro JSON, que é
+	 * Converte um ficheiro CSV num ficheiro JSON. Este metodo le um ficheiro CSV do
+	 * caminho especificado pelo utilizador e converte o mesmo num ficheiro JSON, que e
 	 * guardado no caminho especificado pelo utilizador.
 	 * 
 	 * @throws IOException se ocorrer um erro ao ler ou escrever um ficheiro

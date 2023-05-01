@@ -9,7 +9,6 @@ import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,30 +16,73 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;;
 
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
+
 /**
- * Representa um horário carregado a partir de um ficheiro JSON ou CSV.
+ * Representa um horario carregado a partir de um ficheiro JSON ou CSV.
  */
 
-public class Horario {
-	
+ @MultipartConfig(
+  fileSizeThreshold = 1024 * 1024 * 10,  // 10 MB
+  maxFileSize = 1024 * 1024 * 50,        // 50 MB
+  maxRequestSize = 1024 * 1024 * 100     // 100 MB
+)
+
+public class Horario extends HttpServlet{
+	private static final long serialVersionUID = 1L;
+
+
 	private static final ObjectMapper objectMapper = new ObjectMapper();
+
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		Part filePart = request.getPart("arquivo");
+		String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+		String caminhoArquivo = "C:/Users/Diogo/Desktop/a/" + fileName;
+
+		if(fileName.isEmpty()) {
+			request.setAttribute("mensagem", "Caminho do arquivo invÃ¡lido.");
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+			return;
+		}
+		
+		try {
+			HorarioCarregado horario = carregar(caminhoArquivo);
+			request.setAttribute("horario", horario);
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		} catch(IOException e) {
+			request.setAttribute("mensagem", "Erro ao carregar arquivo.");
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		}
+	}
+	
+
+
 
 	/**
 	 * Carrega um ficheiro de dados JSON ou CSV a partir do caminho especificado.
-	 * Verifica a extensão do ficheiro e invoca o método correspondente para
+	 * Verifica a extensao do ficheiro e invoca o metodo correspondente para
 	 * carregar o ficheiro.
 	 * 
 	 * @param caminho O caminho do ficheiro a ser carregado.
+	 * @return 
 	 * @throws IOException              se ocorrer um erro ao ler o ficheiro.
-	 * @throws IllegalArgumentException se a extensão do ficheiro for inválida.
+	 * @throws IllegalArgumentException se a extensao do ficheiro for invalida.
 	 */
+
 
 	
 	public static HorarioCarregado carregar(String caminho) throws IOException {
 		String extensao = caminho.substring(caminho.lastIndexOf('.') + 1);
 		if (extensao.equalsIgnoreCase("json")) {
 			return carregarJson(caminho);		
-		} else if (extensao.equalsIgnoreCase("csv")) {
+    } else if (extensao.equalsIgnoreCase("csv")) {
 			return carregarCsv(caminho);
 		} else {
 			throw new IllegalArgumentException("Formato de arquivo invalido: " + extensao);
@@ -50,7 +92,7 @@ public class Horario {
 
 	/**
 	 * 
-	 * Carrega um ficheiro CSV com informações relativas às aulas e retorna um
+	 * Carrega um ficheiro CSV com informacoes relativas  as aulas e retorna um
 	 * objeto do tipo HorarioCarregado com as aulas carregadas.
 	 * 
 	 * @param caminhoFicheiro O caminho do ficheiro CSV a ser carregado.
@@ -59,10 +101,11 @@ public class Horario {
 	 *                                  do ficheiro.
 	 * @throws IllegalArgumentException Se o ficheiro estiver vazio.
 	 */
-	public static HorarioCarregado carregarCsv(String caminhoFicheiro) throws IOException {
+
+	 public static HorarioCarregado carregarCsv(String caminhoFicheiro) throws IOException {
 		List<String> linhas = Files.readAllLines(Paths.get(caminhoFicheiro));
 		if (linhas.isEmpty()) {
-			throw new IllegalArgumentException("O arquivo estï¿½ vazio.");
+			throw new IllegalArgumentException("O arquivo esta vazio.");
 		}
 		List<Aula> aulas = new ArrayList<>();
 		HorarioCarregado horario = new HorarioCarregado(aulas);
@@ -81,28 +124,28 @@ public class Horario {
 			aula.setdiaDaSemana(valores[5]);
 			aula.setHoraInicio(valores[6].isEmpty() ? null : LocalTime.parse(valores[6]));
 			aula.setHoraFim(valores[7].isEmpty() ? null : LocalTime.parse(valores[7]));
-			aula.setDataAula(valores[8].isEmpty() ? null
-					: LocalDate.parse(valores[8], DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+			aula.setDataAula(valores[8]);
 			aula.setSala(valores[9].isEmpty() ? null : valores[9]);
 			aula.setLotacaoDaSala(valores[10].isEmpty() ? 0 : Integer.parseInt(valores[10]));
 
 			aulas.add(aula);
 		}
 		horario.setAulas(aulas);
+
 		horario.setPath(caminhoFicheiro);
-		return horario;
+    return horario;
 	}
 
 	/**
 	 * 
-	 * Preenche os valores de uma linha CSV com valores vazios caso o número de
-	 * valores não seja igual a 11. Se o número de valores for maior que 11, lança
-	 * uma exceção.
+	 * Preenche os valores de uma linha CSV com valores vazios caso o n mero de
+	 * valores n o seja igual a 11. Se o n mero de valores for maior que 11, lan a
+	 * uma exce  o.
 	 * 
 	 * @param valores os valores da linha CSV a serem preenchidos
 	 * @return um array com os valores da linha preenchidos com valores vazios se
-	 *         necessário
-	 * @throws IllegalArgumentException se o número de valores for maior que 11
+	 *         necess rio
+	 * @throws IllegalArgumentException se o n mero de valores for maior que 11
 	 */
 	public static String[] preencherValores(String[] valores) {
 		if (valores.length > 11) {
@@ -129,22 +172,22 @@ public class Horario {
 	 * @param filePath O caminho do ficheiro JSON a ser carregado.
 	 * @return Um objeto HorarioCarregado carregado a partir do ficheiro JSON.
 	 * @throws IOException           Se houver um problema ao ler o ficheiro JSON.
-	 * @throws FileNotFoundException Se o ficheiro não for encontrado.
+	 * @throws FileNotFoundException Se o ficheiro n o for encontrado.
 	 */
 	public static HorarioCarregado carregarJson(String filePath) throws IOException {
 		File file = new File(filePath);
 		if (!file.exists()) {
 			throw new FileNotFoundException("Arquivo nao encontrado: " + filePath);
 		}
-//		HorarioCarregado hc = new HorarioCarregado();
-//		hc.setPath(filePath);
-		objectMapper.registerModule(new JavaTimeModule());
+    objectMapper.registerModule(new JavaTimeModule());
 		objectMapper.readValue(file, HorarioCarregado.class);
 		HorarioCarregado hc = objectMapper.readValue(file, HorarioCarregado.class);
 		hc.setPath(filePath);
-		System.out.println("yes");
 		return hc;
 	}
+
+
+	
 
 	public static void main(String[] args) throws IOException {
 		carregarJson("C:\\Users\\gamer\\Desktop\\ISCTE\\horario_exemplo.json");

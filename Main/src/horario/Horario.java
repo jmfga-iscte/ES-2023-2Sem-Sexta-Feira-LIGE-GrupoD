@@ -1,15 +1,20 @@
 package horario;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -30,6 +35,8 @@ import jakarta.servlet.http.Part;
 
 public class Horario extends HttpServlet{
 	private static final long serialVersionUID = 1L;
+
+
 	private static final ObjectMapper objectMapper = new ObjectMapper();
 
 	@Override
@@ -70,16 +77,17 @@ public class Horario extends HttpServlet{
 	 */
 
 
-	 
+	
 	public static HorarioCarregado carregar(String caminho) throws IOException {
 		String extensao = caminho.substring(caminho.lastIndexOf('.') + 1);
 		if (extensao.equalsIgnoreCase("json")) {
-			return carregarJson(caminho);
-		} else if (extensao.equalsIgnoreCase("csv")) {
+			return carregarJson(caminho);		
+    } else if (extensao.equalsIgnoreCase("csv")) {
 			return carregarCsv(caminho);
 		} else {
 			throw new IllegalArgumentException("Formato de arquivo invalido: " + extensao);
 		}
+		
 	}
 
 	/**
@@ -123,8 +131,9 @@ public class Horario extends HttpServlet{
 			aulas.add(aula);
 		}
 		horario.setAulas(aulas);
-		System.out.println(horario.getAulas().get(0).getdiaDaSemana());
-		return horario;
+
+		horario.setPath(caminhoFicheiro);
+    return horario;
 	}
 
 	/**
@@ -170,14 +179,17 @@ public class Horario extends HttpServlet{
 		if (!file.exists()) {
 			throw new FileNotFoundException("Arquivo nao encontrado: " + filePath);
 		}
-		objectMapper.registerModule(new JavaTimeModule());
-		return objectMapper.readValue(file, HorarioCarregado.class); // ler objeto HorarioCarregado a partir do ficheiro
-																		// // JSON
+    objectMapper.registerModule(new JavaTimeModule());
+		objectMapper.readValue(file, HorarioCarregado.class);
+		HorarioCarregado hc = objectMapper.readValue(file, HorarioCarregado.class);
+		hc.setPath(filePath);
+		return hc;
 	}
 
 
 	
 
 	public static void main(String[] args) throws IOException {
+		carregarJson("C:\\Users\\gamer\\Desktop\\ISCTE\\horario_exemplo.json");
 	}
 }

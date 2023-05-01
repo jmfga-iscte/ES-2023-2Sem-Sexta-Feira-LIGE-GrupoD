@@ -8,6 +8,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * JSON ou CSV.
  */
 public class HorarioCarregado {
+	
+	private static String path="";
 	private List<Aula> aulas;
 
 	/**
@@ -18,6 +20,18 @@ public class HorarioCarregado {
 	 */
 	public HorarioCarregado(@JsonProperty("aulas") List<Aula> aulas) {
 		this.aulas = aulas;
+	}
+
+	public HorarioCarregado() {
+
+	}
+	
+	public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
 	}
 
 	/**

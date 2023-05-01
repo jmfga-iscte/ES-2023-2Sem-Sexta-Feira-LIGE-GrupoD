@@ -1,21 +1,26 @@
 package horario;
-import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
-import org.apache.commons.io.FileUtils;
-import org.json.CDL;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
+import com.opencsv.CSVWriter;
+import com.fasterxml.jackson.databind.MappingIterator;
 
 /**
  * Representa um conversor de ficheiros, seja para converter de JSON para CSV e vice-versa.
@@ -36,32 +41,60 @@ public class ConversorFicheiro {
 	 * @throws IOException   se o ficheiro JSON nao puder ser encontrado ou se houver
 	 *                       um erro ao escrever o ficheiro CSV.
 	 * @throws JSONException se ocorrer algum erro ao analisar o ficheiro JSON.
+	 * 
 	 */
-	public static void convertJsonToCsv() {
+	
+	public static void convertFile(String pathOrigem, String pathDestino) throws IOException{
+		String extensao = pathOrigem.substring(pathOrigem.lastIndexOf('.') + 1);
+		if(extensao.equalsIgnoreCase("json")){
+			convertJsonToCsv(pathOrigem, pathDestino);
+		} else if (extensao.equalsIgnoreCase("csv")) {
+			convertCsvToJson(pathOrigem, pathDestino);
+		}
+	}
+	
+	
+	public static void convertJsonToCsv(String pathOrigem, String pathDestino) {
 		String jsonString;
 		JSONObject jsonObject;
 		try {
-			Scanner scanner = new Scanner(System.in);
-			System.out.print("Insira aqui o path do ficheiro que quer converter: ");
-			String JSONPath = scanner.nextLine();
-			System.out.print("Insira aqui o destino onde quer guardar o ficheiro que converteu: ");
-			String CSVPath = scanner.nextLine();
-			jsonString = new String(Files.readAllBytes(Paths.get(JSONPath)));
-			jsonObject = new JSONObject(jsonString);
-			JSONArray doc = jsonObject.getJSONArray("test");
-			File file = new File(CSVPath);
-			String csvString = CDL.toString(doc);
-			FileUtils.writeStringToFile(file, csvString);
-			scanner.close();
+		    jsonString = new String(Files.readAllBytes(Paths.get(pathOrigem)), StandardCharsets.UTF_8);
+		    jsonObject = new JSONObject(jsonString);
+		    JSONArray doc = jsonObject.getJSONArray("aulas");
+		    File file = new File(pathDestino);
+
+		    CSVWriter csvWriter = new CSVWriter(new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.UTF_8), ';', CSVWriter.DEFAULT_QUOTE_CHARACTER, CSVWriter.DEFAULT_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END);
+		    
+		    String[] headers = {"Curso", "Unidade Curricular", "Turno", "Turma", "Inscritos no turno", "Dia da semana", "Hora início da aula", "Hora fim da aula", "Data da aula", "Sala atribuída à aula", "Lotação da sala"};
+		    csvWriter.writeNext(headers);
+
+		    for (int i = 0; i < doc.length(); i++) {
+		        JSONObject obj = doc.getJSONObject(i);
+		        String curso = obj.getString("Curso");
+		        String uC = obj.getString("Unidade Curricular");
+		        String turno = obj.getString("Turno");
+		        String turma = obj.getString("Turma");
+		        int inscritos = obj.getInt("Inscritos no turno");
+		        String dds = obj.getString("Dia da semana");
+		        String hia = obj.getString("Hora início da aula");
+		        String hfa = obj.getString("Hora fim da aula");
+		        String data = obj.getString("Data da aula");
+		        String sala = obj.getString("Sala atribuída à aula");
+		        int lotacao = obj.getInt("Lotação da sala");
+		        String[] record = {curso, uC, turno, turma, String.valueOf(inscritos), dds, hia, hfa, data, sala, String.valueOf(lotacao)};
+		        csvWriter.writeNext(record);
+		    }
+
+		    csvWriter.close();
+
 		} catch (IOException e) {
-			e.printStackTrace();
-			System.out.println("Ficheiro nao encontrado.");
+		    e.printStackTrace();
+		    System.out.println("Ficheiro nao encontrado.");
 		} catch (JSONException e) {
-			e.printStackTrace();
-			System.out.println("Algum erro a ler o JSON.");
+		    e.printStackTrace();
+		    System.out.println("Algum erro a ler o JSON.");
 		}
 	}
-
 	/**
 	 * Converte um ficheiro CSV num ficheiro JSON. Este metodo le um ficheiro CSV do
 	 * caminho especificado pelo utilizador e converte o mesmo num ficheiro JSON, que e
@@ -69,33 +102,40 @@ public class ConversorFicheiro {
 	 * 
 	 * @throws IOException se ocorrer um erro ao ler ou escrever um ficheiro
 	 */
-	public static void convertCsvToJson() throws IOException {
-		Scanner scanner = new Scanner(System.in);
-		System.out.print("Insira aqui o path do ficheiro que quer converter: ");
-		String CSVPath = scanner.nextLine();
-		System.out.print("Insira aqui o destino onde quer guardar o ficheiro que converteu: ");
-		String JSONPath = scanner.nextLine();
-		// Crie um objeto CsvMapper para ler o arquivo CSV
-		CsvMapper csvMapper = new CsvMapper();
-		// Defina o esquema CSV
-		CsvSchema schema = CsvSchema.emptySchema().withHeader();
-		// Leia o arquivo CSV como uma lista de mapas
-		List<Object> data;
-		scanner.close();
-		try {
-			data = csvMapper.readerFor(Map.class).with(schema).readValues(new File(CSVPath)).readAll();
-			// Crie um objeto ObjectMapper para escrever o arquivo JSON
-			ObjectMapper jsonMapper = new ObjectMapper();
-			jsonMapper.enable(SerializationFeature.INDENT_OUTPUT);
-			// Escreva a lista de mapas como um arquivo JSON
-			jsonMapper.writerWithDefaultPrettyPrinter().writeValue(new File(JSONPath), data);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		System.out.println("Arquivo JSON criado com sucesso!");
+	public static void convertCsvToJson(String pathOrigem, String pathDestino) throws IOException {
+		File input = new File(pathOrigem);
+
+	    CsvSchema csvSchema = CsvSchema.builder().setColumnSeparator(';').setUseHeader(true).build();
+
+	    CsvMapper csvMapper = new CsvMapper();
+
+
+	    // Read data from CSV file
+	    MappingIterator<Map<String, String>> mappingIterator = csvMapper.readerFor(Map.class).with(csvSchema).readValues(input);
+	    List<Map<String, String>> readAll = mappingIterator.readAll();
+
+	    // Convert List<Map<String, String>> to List<HashMap<String, String>>
+	    List<HashMap<String, String>> dataList = new ArrayList<>();
+	    for (Map<String, String> map : readAll) {
+	        HashMap<String, String> hashMap = new HashMap<>();
+	        for (String key : map.keySet()) {
+	            hashMap.put(key.toLowerCase(), map.get(key));
+	        }
+	        dataList.add(hashMap);
+	    }
+	    ObjectMapper mapper = new ObjectMapper();
+	    mapper.enable(SerializationFeature.INDENT_OUTPUT);
+
+	    // Write JSON formatted data to output.json file
+	    Map<String, List<Map<String, String>>> jsonData = new HashMap<>();
+	    jsonData.put("aulas", readAll);
+	    File output = new File(pathDestino);
+	    mapper.writerWithDefaultPrettyPrinter().writeValue(output, jsonData);
 	}
 
-	public static void main(String[] args) {
-		convertJsonToCsv();
+	          
+
+
+	public static void main(String[] args) throws IOException {
 	}
 }

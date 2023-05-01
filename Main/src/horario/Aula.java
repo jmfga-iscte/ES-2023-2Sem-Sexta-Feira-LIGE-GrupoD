@@ -1,230 +1,243 @@
 package horario;
 import java.time.LocalTime;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-		/**
-		 * Representa uma aula associada a um determinado curso, unidade curricular e turno.
-		 */
-		public class Aula {
-			private String curso;
-			private String unidadeCurricular;
-			private String turno;
-			private String turma;
-			private int inscritosNoTurno;
-			private String diaDaSemana;
-			private LocalTime horaInicio;
-			private LocalTime horaFim;
-			private String data;
-			private String sala;
-			private int lotacaoDaSala;
+/**
+ * Representa uma aula associada a um determinado curso, unidade curricular e turno.
+ */
+public class Aula {
+	@JsonProperty("Curso")
+	private String Curso;
+	@JsonProperty("Unidade Curricular")
+	private String UnidadeCurricular;
+	@JsonProperty("Turno")
+	private String Turno;
+	@JsonProperty("Turma")
+	private String Turma;
+	@JsonProperty("Inscritos no turno")
+	private int InscritosNoTurno;
+	@JsonProperty("Dia da semana")
+	private String DiaDaSemana;
+	@JsonProperty("Hora início da aula")
+	private LocalTime HoraInicio;
+	@JsonProperty("Hora fim da aula")
+	private LocalTime HoraFim;
+	@JsonProperty("Data da aula")
+	@JsonFormat(pattern = "dd/MM/yyyy")
+	private LocalDate Data;
+	@JsonProperty("Sala atribuída à aula")
+	private String Sala;
+	@JsonProperty("Lotação da sala")
+	private int LotacaoDaSala;
 
-			/**
-			 * Cria uma nova instncia de Aula com valores padr o. Os valores padr o devem
-			 * ser definidos posteriormente usando os m todos setters.
-			 */
-			public Aula() {
+	/**
+	 * Cria uma nova instância de Aula com valores padrão. Os valores padrão devem
+	 * ser definidos posteriormente usando os métodos setters.
+	 */
+	public Aula() {
 
-				// "Usamos o setter para definir os valores, seria tambem um erro usar um
-				// construtor com 11 parametros
+		// "Usamos o setter para definir os valores, seria tambem um erro usar um
+		// construtor com 11 parametros
 
-			}
+	}
 
-			/**
-			 * Retorna o nome do curso.
-			 *
-			 * @return o nome do curso
-			 */
-			public String getCurso() {
-				return curso;
-			}
+	/**
+	 * Retorna o nome do curso.
+	 *
+	 * @return o nome do curso
+	 */
+	public String getCurso() {
+		return Curso;
+	}
 
-			/**
-			 * Define o nome do curso.
-			 *
-			 * @param curso o nome do curso
-			 */
-			public void setCurso(String curso) {
-				this.curso = curso;
-			}
+	/**
+	 * Define o nome do curso.
+	 *
+	 * @param curso o nome do curso
+	 */
+	public void setCurso(String curso) {
+		this.Curso = curso;
+	}
 
-			/**
-			 * Retorna o nome da unidade curricular.
-			 *
-			 * @return o nome da unidade curricular
-			 */
-			public String getUnidadeCurricular() {
-				return unidadeCurricular;
-			}
+	/**
+	 * Retorna o nome da unidade curricular.
+	 *
+	 * @return o nome da unidade curricular
+	 */
+	public String getUnidadeCurricular() {
+		return UnidadeCurricular;
+	}
 
-			/**
-			 * Define o nome da unidade curricular.
-			 *
-			 * @param unidadeCurricular o nome da unidade curricular
-			 */
-			public void setUnidadeCurricular(String unidadeCurricular) {
-				this.unidadeCurricular = unidadeCurricular;
-			}
+	/**
+	 * Define o nome da unidade curricular.
+	 *
+	 * @param unidadeCurricular o nome da unidade curricular
+	 */
+	public void setUnidadeCurricular(String unidadeCurricular) {
+		this.UnidadeCurricular = unidadeCurricular;
+	}
 
-			/**
-			 * Retorna o nome do turno.
-			 *
-			 * @return o nome do turno
-			 */
-			public String getTurno() {
-				return turno;
-			}
+	/**
+	 * Retorna o nome do turno.
+	 *
+	 * @return o nome do turno
+	 */
+	public String getTurno() {
+		return Turno;
+	}
 
-			/**
-			 * Define o nome do turno.
-			 *
-			 * @param turno o nome do turno
-			 */
-			public void setTurno(String turno) {
-				this.turno = turno;
-			}
+	/**
+	 * Define o nome do turno.
+	 *
+	 * @param turno o nome do turno
+	 */
+	public void setTurno(String turno) {
+		this.Turno = turno;
+	}
 
-			/**
-			 * Retorna o nome da turma.
-			 *
-			 * @return o nome da turma
-			 */
-			public String getTurma() {
-				return turma;
-			}
+	/**
+	 * Retorna o nome da turma.
+	 *
+	 * @return o nome da turma
+	 */
+	public String getTurma() {
+		return Turma;
+	}
 
-			/**
-			 * Define o nome da turma.
-			 *
-			 * @param turma o nome da turma
-			 */
-			public void setTurma(String turma) {
-				this.turma = turma;
-			}
+	/**
+	 * Define o nome da turma.
+	 *
+	 * @param turma o nome da turma
+	 */
+	public void setTurma(String turma) {
+		this.Turma = turma;
+	}
 
-			/**
-			 * Retorna o n mero de alunos inscritos no turno.
-			 *
-			 * @return o n mero de alunos inscritos no turno
-			 */
-			public int getInscritosNoTurno() {
-				return inscritosNoTurno;
-			}
+	/**
+	 * Retorna o número de alunos inscritos no turno.
+	 *
+	 * @return o número de alunos inscritos no turno
+	 */
+	public int getInscritosNoTurno() {
+		return InscritosNoTurno;
+	}
 
-			/**
-			 * Define o n mero de alunos inscritos no turno.
-			 * 
-			 * @param inscritosNoTurno o n mero de alunos inscritos no turno
-			 */
-			public void setInscritosNoTurno(int inscritosNoTurno) {
-				this.inscritosNoTurno = inscritosNoTurno;
-			}
+	/**
+	 * Define o número de alunos inscritos no turno.
+	 * 
+	 * @param inscritosNoTurno o número de alunos inscritos no turno
+	 */
+	public void setInscritosNoTurno(int inscritosNoTurno) {
+		this.InscritosNoTurno = inscritosNoTurno;
+	}
 
-			/**
-			 * Retorna o dia da semana da aula.
-			 *
-			 * @return o dia da semana da aula
-			 */
-			public String getdiaDaSemana() {
-				return diaDaSemana;
-			}
+	/**
+	 * Retorna o dia da semana da aula.
+	 *
+	 * @return o dia da semana da aula
+	 */
+	public String getdiaDaSemana() {
+		return DiaDaSemana;
+	}
 
-			/**
-			 * Define o dia da semana da aula.
-			 * 
-			 * @param dia O dia da semana da aula.
-			 */
-			public void setdiaDaSemana(String dia) {
-				this.diaDaSemana = dia;
-			}
+	/**
+	 * Define o dia da semana da aula.
+	 * 
+	 * @param dia O dia da semana da aula.
+	 */
+	public void setdiaDaSemana(String dia) {
+		this.DiaDaSemana = dia;
+	}
 
-			/**
-			 * Retorna a hora de incio da aula.
-			 * 
-			 * @return A hora de in io da aula.
-			 */
-			public LocalTime getHoraInicio() {
-				return horaInicio;
-			}
+	/**
+	 * Retorna a hora de início da aula.
+	 * 
+	 * @return A hora de início da aula.
+	 */
+	public LocalTime getHoraInicio() {
+		return HoraInicio;
+	}
 
-			/**
-			 * Define a hora de incio da aula.
-			 * 
-			 * @param horaInicio A hora de incio da aula.
-			 */
-			public void setHoraInicio(LocalTime horaInicio) {
-				this.horaInicio = horaInicio;
-			}
+	/**
+	 * Define a hora de início da aula.
+	 * 
+	 * @param horaInicio A hora de início da aula.
+	 */
+	public void setHoraInicio(LocalTime horaInicio) {
+		this.HoraInicio = horaInicio;
+	}
 
-			/**
-			 * Retorna a hora de fim da aula.
-			 * 
-			 * @return A hora de fim da aula.
-			 */
-			public LocalTime getHoraFim() {
-				return horaFim;
-			}
+	/**
+	 * Retorna a hora de fim da aula.
+	 * 
+	 * @return A hora de fim da aula.
+	 */
+	public LocalTime getHoraFim() {
+		return HoraFim;
+	}
 
-			/**
-			 * Define a hora de fim da aula.
-			 * 
-			 * @param horaFim A hora de fim da aula.
-			 */
-			public void setHoraFim(LocalTime horaFim) {
-				this.horaFim = horaFim;
-			}
+	/**
+	 * Define a hora de fim da aula.
+	 * 
+	 * @param horaFim A hora de fim da aula.
+	 */
+	public void setHoraFim(LocalTime horaFim) {
+		this.HoraFim = horaFim;
+	}
 
-			/**
-			 * Retorna a data da aula.
-			 * 
-			 * @return A data da aula.
-			 */
-			public String getdData() {
-				return data;
-			}
+	/**
+	 * Retorna a data da aula.
+	 * 
+	 * @return A data da aula.
+	 */
+	public LocalDate getdData() {
+		return Data;
+	}
 
-			/**
-			 * Define a data da aula.
-			 * 
-			 * @param data A data da aula.
-			 */
-			public void setDataAula(String data) {
-				this.data = data;
-			}
+	/**
+	 * Define a data da aula.
+	 * 
+	 * @param data A data da aula.
+	 */
+	public void setDataAula(LocalDate data) {
+		this.Data = data;
+	}
 
-			/**
-			 * Retorna o nome da sala em que a aula ser  realizada.
-			 * 
-			 * @return O nome da sala em que a aula ser  realizada.
-			 */
-			public String getSala() {
-				return sala;
-			}
+	/**
+	 * Retorna o nome da sala em que a aula será realizada.
+	 * 
+	 * @return O nome da sala em que a aula será realizada.
+	 */
+	public String getSala() {
+		return Sala;
+	}
 
-			/**
-			 * Define o nome da sala em que a aula ser  realizada.
-			 * 
-			 * @param sala O nome da sala em que a aula ser  realizada.
-			 */
-			public void setSala(String sala) {
-				this.sala = sala;
-			}
+	/**
+	 * Define o nome da sala em que a aula será realizada.
+	 * 
+	 * @param sala O nome da sala em que a aula será realizada.
+	 */
+	public void setSala(String sala) {
+		this.Sala = sala;
+	}
 
-			/**
-			 * Retorna a lota  o da sala em que a aula ser  realizada.
-			 * 
-			 * @return A lota  o da sala em que a aula ser  realizada.
-			 */
-			public int getLotacaoDaSala() {
-				return lotacaoDaSala;
-			}
+	/**
+	 * Retorna a lotação da sala em que a aula será realizada.
+	 * 
+	 * @return A lotação da sala em que a aula será realizada.
+	 */
+	public int getLotacaoDaSala() {
+		return LotacaoDaSala;
+	}
 
-			/**
-			 * Define a lota  o da sala em que a aula ser  realizada.
-			 * 
-			 * @param lotacaoDaSala A lota  o da sala em que a aula ser  realizada.
-			 */
-			public void setLotacaoDaSala(int lotacaoDaSala) {
-				this.lotacaoDaSala = lotacaoDaSala;
-			}
+	/**
+	 * Define a lotação da sala em que a aula será realizada.
+	 * 
+	 * @param lotacaoDaSala A lotação da sala em que a aula será realizada.
+	 */
+	public void setLotacaoDaSala(int lotacaoDaSala) {
+		this.LotacaoDaSala = lotacaoDaSala;
+	}
+}
 
-			
-		}

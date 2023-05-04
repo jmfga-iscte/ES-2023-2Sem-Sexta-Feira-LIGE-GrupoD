@@ -9,12 +9,13 @@ import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -54,7 +55,7 @@ public class Horario extends HttpServlet{
 		
 		try {
 			HorarioCarregado horario = carregar(caminhoArquivo);
-			request.setAttribute("horario", horario);
+			request.setAttribute("horarioCarregado", horario);
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		} catch(IOException e) {
 			request.setAttribute("mensagem", "Erro ao carregar arquivo.");
@@ -124,8 +125,7 @@ public class Horario extends HttpServlet{
 			aula.setdiaDaSemana(valores[5]);
 			aula.setHoraInicio(valores[6].isEmpty() ? null : LocalTime.parse(valores[6]));
 			aula.setHoraFim(valores[7].isEmpty() ? null : LocalTime.parse(valores[7]));
-			aula.setDataAula(valores[8]);
-			aula.setSala(valores[9].isEmpty() ? null : valores[9]);
+			aula.setDataAula(valores[8].isEmpty() ? null : LocalDate.parse(valores[8], DateTimeFormatter.ofPattern("dd/MM/yyyy")));aula.setSala(valores[9].isEmpty() ? null : valores[9]);
 			aula.setLotacaoDaSala(valores[10].isEmpty() ? 0 : Integer.parseInt(valores[10]));
 
 			aulas.add(aula);
@@ -179,7 +179,7 @@ public class Horario extends HttpServlet{
 		if (!file.exists()) {
 			throw new FileNotFoundException("Arquivo nao encontrado: " + filePath);
 		}
-    objectMapper.registerModule(new JavaTimeModule());
+		objectMapper.registerModule(new JavaTimeModule());
 		objectMapper.readValue(file, HorarioCarregado.class);
 		HorarioCarregado hc = objectMapper.readValue(file, HorarioCarregado.class);
 		hc.setPath(filePath);

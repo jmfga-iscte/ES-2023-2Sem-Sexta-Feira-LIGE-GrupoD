@@ -35,7 +35,7 @@ public class ConversorFicheiro {
 	 * ficheiro JSON que deseja converter e o caminho completo onde deseja guardar o
 	 * ficheiro CSV resultante.
 	 *
-	 * O mï¿½todo usa a biblioteca JSON-java para analisar o ficheiro JSON e a
+	 * O metodo usa a biblioteca JSON-java para analisar o ficheiro JSON e a
 	 * biblioteca Apache Commons CSV para converter o objeto JSON numa string CSV.
 	 *
 	 * @throws IOException   se o ficheiro JSON nao puder ser encontrado ou se houver
@@ -65,7 +65,7 @@ public class ConversorFicheiro {
 
 		    CSVWriter csvWriter = new CSVWriter(new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.UTF_8), ';', CSVWriter.DEFAULT_QUOTE_CHARACTER, CSVWriter.DEFAULT_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END);
 		    
-		    String[] headers = {"Curso", "Unidade Curricular", "Turno", "Turma", "Inscritos no turno", "Dia da semana", "Hora início da aula", "Hora fim da aula", "Data da aula", "Sala atribuída à aula", "Lotação da sala"};
+		    String[] headers = {"Curso", "Unidade Curricular", "Turno", "Turma", "Inscritos no turno", "Dia da semana", "Hora inicio da aula", "Hora fim da aula", "Data da aula", "Sala atribuida a aula", "Lotacao da sala"};
 		    csvWriter.writeNext(headers);
 
 		    for (int i = 0; i < doc.length(); i++) {
@@ -76,11 +76,11 @@ public class ConversorFicheiro {
 		        String turma = obj.getString("Turma");
 		        int inscritos = obj.getInt("Inscritos no turno");
 		        String dds = obj.getString("Dia da semana");
-		        String hia = obj.getString("Hora início da aula");
+		        String hia = obj.getString("Hora inï¿½cio da aula");
 		        String hfa = obj.getString("Hora fim da aula");
 		        String data = obj.getString("Data da aula");
-		        String sala = obj.getString("Sala atribuída à aula");
-		        int lotacao = obj.getInt("Lotação da sala");
+		        String sala = obj.getString("Sala atribuï¿½da ï¿½ aula");
+		        int lotacao = obj.getInt("Lotaï¿½ï¿½o da sala");
 		        String[] record = {curso, uC, turno, turma, String.valueOf(inscritos), dds, hia, hfa, data, sala, String.valueOf(lotacao)};
 		        csvWriter.writeNext(record);
 		    }

@@ -1,4 +1,5 @@
 package horario;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -141,6 +142,25 @@ public class Aula {
 		return DiaDaSemana;
 	}
 
+	public int getdiaDaSemanaInt(String DiaDaSemana){
+		switch(DiaDaSemana) {
+			case "Seg":
+			  return 1;
+			case "Ter":
+			  return 2;
+			case "Qua":
+			  return 3;
+			case "Qui":
+			  return 4;
+			case "Sex":
+			  return 5;
+			default:
+			  return 0;
+		  }
+		  
+
+	}
+
 	/**
 	 * Define o dia da semana da aula.
 	 * 
@@ -157,6 +177,10 @@ public class Aula {
 	 */
 	public LocalTime getHoraInicio() {
 		return HoraInicio;
+	}
+
+	public int getHoraInt(LocalTime d) {
+		return d.getHour();
 	}
 
 	/**

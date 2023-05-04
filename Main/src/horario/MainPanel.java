@@ -10,11 +10,11 @@ import javax.swing.JFileChooser;
 public class MainPanel extends JPanel{
 
 		private static HorarioCarregado carregado=null;
-		static JFrame frame = new JFrame("Horário");
+		static JFrame frame = new JFrame("Horario");
 		final JLabel label = new JLabel();
 		
 		private static void createWindow() {    
-		      JFrame frame = new JFrame("Horário");
+		      JFrame frame = new JFrame("Horï¿½rio");
 		      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		      createGUI(frame);
 		      frame.setSize(560, 200);      
@@ -26,9 +26,9 @@ public class MainPanel extends JPanel{
 	    	JPanel panel = new JPanel();
 	        LayoutManager layout = new FlowLayout();  
 	        panel.setLayout(layout);
-	        JButton button1 = new JButton("Carregar horário");
-	        JButton button2 = new JButton("Converter horário");
-	        JButton button3 = new JButton("Vizualizar horário na web");
+	        JButton button1 = new JButton("Carregar horario");
+	        JButton button2 = new JButton("Converter horario");
+	        JButton button3 = new JButton("Vizualizar horario na web");
 	        JButton button4 = new JButton("Exit");
 	        final JLabel label = new JLabel();
 

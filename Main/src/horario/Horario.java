@@ -136,13 +136,10 @@ public class Horario {
 		if (!file.exists()) {
 			throw new FileNotFoundException("Arquivo nao encontrado: " + filePath);
 		}
-//		HorarioCarregado hc = new HorarioCarregado();
-//		hc.setPath(filePath);
 		objectMapper.registerModule(new JavaTimeModule());
 		objectMapper.readValue(file, HorarioCarregado.class);
 		HorarioCarregado hc = objectMapper.readValue(file, HorarioCarregado.class);
 		hc.setPath(filePath);
-		System.out.println("yes");
 		return hc;
 	}
 

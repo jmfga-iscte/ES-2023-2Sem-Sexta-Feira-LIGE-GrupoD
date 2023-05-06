@@ -157,8 +157,8 @@ public class Aula {
 	 * 
 	 * @return A hora de início da aula.
 	 */
-	public LocalTime getHoraInicio() {
-		return HoraInicio;
+	public String getHoraInicio() {
+		return HoraInicio.toString();
 	}
 
 	/**
@@ -175,8 +175,8 @@ public class Aula {
 	 * 
 	 * @return A hora de fim da aula.
 	 */
-	public LocalTime getHoraFim() {
-		return HoraFim;
+	public String getHoraFim() {
+		return HoraFim.toString();
 	}
 
 	/**
@@ -193,8 +193,8 @@ public class Aula {
 	 * 
 	 * @return A data da aula.
 	 */
-	public LocalDate getdData() {
-		return Data;
+	public String getData() {
+		return Data.toString();
 	}
 
 	/**

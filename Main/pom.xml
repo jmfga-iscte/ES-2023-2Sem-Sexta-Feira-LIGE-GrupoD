@@ -4,7 +4,12 @@
   <artifactId>Projeto_ES</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   	<dependencies>
-		  <dependency>
+		<dependency>
+			<groupId>com.dlsc.formsfx</groupId>
+			<artifactId>formsfx-core</artifactId>
+			<version>11.3.2</version>
+		</dependency>
+		<dependency>
 		    <groupId>com.opencsv</groupId>
 		    <artifactId>opencsv</artifactId>
 		    <version>5.7.1</version>

@@ -11,3 +11,4 @@ Jorge Gouveia - nº98658
 Ricardo Agostinho - nº98519
 Rodrigo Soares - nº98769
 
+Não foi implementado a funcionalidade de navegação para visualizar diferentes semanas do horário

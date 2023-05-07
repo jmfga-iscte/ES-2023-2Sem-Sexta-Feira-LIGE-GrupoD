@@ -11,4 +11,4 @@ Jorge Gouveia - nº98658
 Ricardo Agostinho - nº98519
 Rodrigo Soares - nº98769
 
-Não foi implementado a funcionalidade de navegação para visualizar diferentes semanas do horário
+Não foi implementado a funcionalidade de navegação para visualizar diferentes semanas do horário e autenticação dos utilizadores e correspondente acesso aos seus dados na plataforma Fénix

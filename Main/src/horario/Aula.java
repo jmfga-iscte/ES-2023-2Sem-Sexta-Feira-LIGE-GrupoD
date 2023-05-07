@@ -1,7 +1,6 @@
 package horario;
 import java.time.LocalDate;
 import java.time.LocalTime;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -21,21 +20,21 @@ public class Aula {
 	private int InscritosNoTurno;
 	@JsonProperty("Dia da semana")
 	private String DiaDaSemana;
-	@JsonProperty("Hora inÌcio da aula")
+	@JsonProperty("Hora in√≠cio da aula")
 	private LocalTime HoraInicio;
 	@JsonProperty("Hora fim da aula")
 	private LocalTime HoraFim;
 	@JsonProperty("Data da aula")
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	public LocalDate Data;
-	@JsonProperty("Sala atribuÌda ‡ aula")
+	@JsonProperty("Sala atribu√≠da √† aula")
 	private String Sala;
-	@JsonProperty("LotaÁ„o da sala")
+	@JsonProperty("Lota√ß√£o da sala")
 	private int LotacaoDaSala;
 
 	/**
-	 * Cria uma nova inst‚ncia de Aula com valores padr„o. Os valores padr„o devem
-	 * ser definidos posteriormente usando os mÈtodos setters.
+	 * Cria uma nova inst√¢ncia de Aula com valores padr√£o. Os valores padr√£o devem
+	 * ser definidos posteriormente usando os m√©todos setters.
 	 */
 	public Aula() {
 
@@ -117,18 +116,18 @@ public class Aula {
 	}
 
 	/**
-	 * Retorna o n˙mero de alunos inscritos no turno.
+	 * Retorna o n√∫mero de alunos inscritos no turno.
 	 *
-	 * @return o n˙mero de alunos inscritos no turno
+	 * @return o n√∫mero de alunos inscritos no turno
 	 */
 	public int getInscritosNoTurno() {
 		return InscritosNoTurno;
 	}
 
 	/**
-	 * Define o n˙mero de alunos inscritos no turno.
+	 * Define o n√∫mero de alunos inscritos no turno.
 	 * 
-	 * @param inscritosNoTurno o n˙mero de alunos inscritos no turno
+	 * @param inscritosNoTurno o n√∫mero de alunos inscritos no turno
 	 */
 	public void setInscritosNoTurno(int inscritosNoTurno) {
 		this.InscritosNoTurno = inscritosNoTurno;
@@ -143,6 +142,25 @@ public class Aula {
 		return DiaDaSemana;
 	}
 
+	public int getdiaDaSemanaInt(String DiaDaSemana){
+		switch(DiaDaSemana) {
+			case "Seg":
+			  return 1;
+			case "Ter":
+			  return 2;
+			case "Qua":
+			  return 3;
+			case "Qui":
+			  return 4;
+			case "Sex":
+			  return 5;
+			default:
+			  return 0;
+		  }
+		  
+
+	}
+
 	/**
 	 * Define o dia da semana da aula.
 	 * 
@@ -153,18 +171,22 @@ public class Aula {
 	}
 
 	/**
-	 * Retorna a hora de inÌcio da aula.
+	 * Retorna a hora de in√≠cio da aula.
 	 * 
-	 * @return A hora de inÌcio da aula.
+	 * @return A hora de in√≠cio da aula.
 	 */
 	public String getHoraInicio() {
 		return HoraInicio.toString();
 	}
 
+	public int getHoraInt(LocalTime d) {
+		return d.getHour();
+	}
+
 	/**
-	 * Define a hora de inÌcio da aula.
+	 * Define a hora de in√≠cio da aula.
 	 * 
-	 * @param horaInicio A hora de inÌcio da aula.
+	 * @param horaInicio A hora de in√≠cio da aula.
 	 */
 	public void setHoraInicio(LocalTime horaInicio) {
 		this.HoraInicio = horaInicio;
@@ -207,38 +229,39 @@ public class Aula {
 	}
 
 	/**
-	 * Retorna o nome da sala em que a aula ser· realizada.
+	 * Retorna o nome da sala em que a aula ser√° realizada.
 	 * 
-	 * @return O nome da sala em que a aula ser· realizada.
+	 * @return O nome da sala em que a aula ser√° realizada.
 	 */
 	public String getSala() {
 		return Sala;
 	}
 
 	/**
-	 * Define o nome da sala em que a aula ser· realizada.
+	 * Define o nome da sala em que a aula ser√° realizada.
 	 * 
-	 * @param sala O nome da sala em que a aula ser· realizada.
+	 * @param sala O nome da sala em que a aula ser√° realizada.
 	 */
 	public void setSala(String sala) {
 		this.Sala = sala;
 	}
 
 	/**
-	 * Retorna a lotaÁ„o da sala em que a aula ser· realizada.
+	 * Retorna a lota√ß√£o da sala em que a aula ser√° realizada.
 	 * 
-	 * @return A lotaÁ„o da sala em que a aula ser· realizada.
+	 * @return A lota√ß√£o da sala em que a aula ser√° realizada.
 	 */
 	public int getLotacaoDaSala() {
 		return LotacaoDaSala;
 	}
 
 	/**
-	 * Define a lotaÁ„o da sala em que a aula ser· realizada.
+	 * Define a lota√ß√£o da sala em que a aula ser√° realizada.
 	 * 
-	 * @param lotacaoDaSala A lotaÁ„o da sala em que a aula ser· realizada.
+	 * @param lotacaoDaSala A lota√ß√£o da sala em que a aula ser√° realizada.
 	 */
 	public void setLotacaoDaSala(int lotacaoDaSala) {
 		this.LotacaoDaSala = lotacaoDaSala;
 	}
 }
+

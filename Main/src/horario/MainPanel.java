@@ -18,7 +18,6 @@ import javax.swing.table.DefaultTableModel;
 
 import com.opencsv.CSVWriter;
 
-
 public class MainPanel extends JPanel {
 	
 	
@@ -38,7 +37,7 @@ public class MainPanel extends JPanel {
 
 
 	private static void createWindow() {    
-		JFrame frame = new JFrame("Horário");
+		JFrame frame = new JFrame("Horï¿½rio");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		createGUI(frame);
 		frame.setSize(560, 200);      
@@ -52,9 +51,9 @@ public class MainPanel extends JPanel {
 		JPanel panelTableSobrepostas = new JPanel();
 		LayoutManager layout = new FlowLayout();  
 		panel.setLayout(layout);
-		JButton button1 = new JButton("Carregar horário");
-		JButton button2 = new JButton("Converter horário");
-		JButton button3 = new JButton("Criar horário");
+		JButton button1 = new JButton("Carregar horï¿½rio");
+		JButton button2 = new JButton("Converter horï¿½rio");
+		JButton button3 = new JButton("Criar horï¿½rio");
 		JButton button4 = new JButton("Ver aulas sobrepostas");
 		JButton button5 = new JButton("Ver sala sobrelotadas");
 		JButton button6 = new JButton("Exit");
@@ -94,6 +93,7 @@ public class MainPanel extends JPanel {
 							ConversorFicheiro.convertFile(carregado.getPath(), fileChooser.getSelectedFile().getAbsolutePath() + extensao);
 							File file = fileChooser.getSelectedFile();
 							label2.setText("File Saved as: " + file.getName() + extensao);
+
 						} catch (IOException e1) {
 
 							e1.printStackTrace();
@@ -103,7 +103,7 @@ public class MainPanel extends JPanel {
 					}
 				}
 				else {
-					label2.setText("Carregue um horário primeiro!");
+					label2.setText("Carregue um horï¿½rio primeiro!");
 				}
 			}
 		});
@@ -125,7 +125,7 @@ public class MainPanel extends JPanel {
 					buttonGroup.add(option2);
 
 					frame2.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-					frame2.setTitle("Seleção de Unidades Curriculares");
+					frame2.setTitle("Seleï¿½ï¿½o de Unidades Curriculares");
 					frame2.setLocationRelativeTo(null);
 					frame2.setSize(500, 200);
 
@@ -142,8 +142,8 @@ public class MainPanel extends JPanel {
 						topPanel.add(checkbox);
 					}
 
-					JButton button = new JButton("Criar Horário");
-					JButton button2 = new JButton("Guardar Horário Criado");
+					JButton button = new JButton("Criar Horï¿½rio");
+					JButton button2 = new JButton("Guardar Horï¿½rio Criado");
 					button.addActionListener(new ActionListener() {
 						@Override
 						public void actionPerformed(ActionEvent e) {
@@ -164,7 +164,7 @@ public class MainPanel extends JPanel {
 									}
 								}
 								selected.setAulas(aux);
-								label3.setText("Horário criado!");
+								label3.setText("Horï¿½rio criado!");
 
 							} else {
 								label3.setText("Selecione uma UC primeiro!");
@@ -203,7 +203,7 @@ public class MainPanel extends JPanel {
 									label3.setText("Escolha o formato que quer guardar!");
 								}
 							} else {
-								label3.setText("Ainda não criou nenhum horário!");
+								label3.setText("Ainda nï¿½o criou nenhum horï¿½rio!");
 							}
 						}
 					});
@@ -219,7 +219,7 @@ public class MainPanel extends JPanel {
 					frame2.setVisible(true);
 
 				} else {
-					label2.setText("Carregue um horário primeiro!");
+					label2.setText("Carregue um horï¿½rio primeiro!");
 				}
 			}
 
@@ -230,7 +230,7 @@ public class MainPanel extends JPanel {
 				if(!(carregado==null)){
 					getSobrepostas();
 					if(duplicates.size()==0){
-						label2.setText("Não existem aulas sobrepostas no horário que carregou!");
+						label2.setText("Nï¿½o existem aulas sobrepostas no horï¿½rio que carregou!");
 						return;
 					} else if (auxSobrepostas == 0){
 						frameTabela.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
@@ -239,7 +239,7 @@ public class MainPanel extends JPanel {
 						frameTabela.setLayout(new BorderLayout());
 						frameTabela.setSize(1000, 400);
 		            	String[] columnNames = {"Curso", "Unidade Curricular", "Turno", "Turma", "Inscritos no turno",
-		            			"Dia da semana", "Hora início da aula", "Hora fim da aula", "Data da aula", "Sala atribuída à aula", "Lotação da sala"};
+		            			"Dia da semana", "Hora inï¿½cio da aula", "Hora fim da aula", "Data da aula", "Sala atribuï¿½da ï¿½ aula", "Lotaï¿½ï¿½o da sala"};
 						DefaultTableModel model = new DefaultTableModel(columnNames, 0);
 						
 						List<String[]> dados = new ArrayList<>();
@@ -270,7 +270,7 @@ public class MainPanel extends JPanel {
 					}
 					frameTabela.setVisible(true);
 				} else {
-					label2.setText("Carregue um horário primeiro!");
+					label2.setText("Carregue um horï¿½rio primeiro!");
 				}
 			}
 		});
@@ -280,7 +280,7 @@ public class MainPanel extends JPanel {
 				if(!(carregado==null)){
 					getSobrelotadas();
 					if(sobrelotadas.size()==0){
-						label2.setText("Não existem aulas sobrelotadas no horário que carregou!");
+						label2.setText("Nï¿½o existem aulas sobrelotadas no horï¿½rio que carregou!");
 						return;
 					} else if (auxSobrelotadas == 0){
 					
@@ -291,7 +291,7 @@ public class MainPanel extends JPanel {
 						frameTabelaSobrepostas.setSize(1000, 400);
 						
 						String[] columnNames = {"Curso", "Unidade Curricular", "Turno", "Turma", "Inscritos no turno",
-		            			"Dia da semana", "Hora início da aula", "Hora fim da aula", "Data da aula", "Sala atribuída à aula", "Lotação da sala"};
+		            			"Dia da semana", "Hora inï¿½cio da aula", "Hora fim da aula", "Data da aula", "Sala atribuï¿½da ï¿½ aula", "Lotaï¿½ï¿½o da sala"};
 						DefaultTableModel model = new DefaultTableModel(columnNames, 0);
 						
 						List<String[]> dados = new ArrayList<>();
@@ -324,7 +324,7 @@ public class MainPanel extends JPanel {
 					frameTabelaSobrepostas.setVisible(true);
 				
 				} else {
-					label2.setText("Carregue um horário primeiro!");
+					label2.setText("Carregue um horï¿½rio primeiro!");
 				}
 				
 			}
@@ -349,13 +349,13 @@ public class MainPanel extends JPanel {
 public static void getSobrepostas(){
 		Map<String, Integer> countMap = new HashMap<>();
 	
-		// Conta a quantidade de ocorrências de cada hora de início na lista
+		// Conta a quantidade de ocorrï¿½ncias de cada hora de inï¿½cio na lista
 		for (Aula aula : carregado.getAulas()) {
 			String horaInicio = aula.getHoraInicio();
 			countMap.put(horaInicio, countMap.getOrDefault(horaInicio, 0) + 1);
 		}
 	
-		// Adiciona as aulas com hora de início repetida à lista de duplicatas
+		// Adiciona as aulas com hora de inï¿½cio repetida ï¿½ lista de duplicatas
 		for (Aula aula : carregado.getAulas()) {
 			String horaInicio = aula.getHoraInicio();
 			if (countMap.get(horaInicio) > 1) {
@@ -390,7 +390,7 @@ public static void saveCsv(HorarioCarregado hc, String pathDestino){
 		try {
 			CSVWriter csvWriter = new CSVWriter(new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.UTF_8), ';', CSVWriter.DEFAULT_QUOTE_CHARACTER, CSVWriter.DEFAULT_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END);
 
-			String[] headers = {"Curso", "Unidade Curricular", "Turno", "Turma", "Inscritos no turno", "Dia da semana", "Hora início da aula", "Hora fim da aula", "Data da aula", "Sala atribuída à aula", "Lotação da sala"};
+			String[] headers = {"Curso", "Unidade Curricular", "Turno", "Turma", "Inscritos no turno", "Dia da semana", "Hora inï¿½cio da aula", "Hora fim da aula", "Data da aula", "Sala atribuï¿½da ï¿½ aula", "Lotaï¿½ï¿½o da sala"};
 			csvWriter.writeNext(headers);
 
 			for (Aula aula : hc.getAulas()){

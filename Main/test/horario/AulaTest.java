@@ -1,6 +1,7 @@
 package horario;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 
 import org.junit.jupiter.api.Test;
@@ -30,12 +31,26 @@ class AulaTest {
                 aula.setHoraInicio(LocalTime.of(13,0,0));
                 assertEquals(LocalTime.of(13,0,0), aula.getHoraInicio());
                 aula.setHoraFim(LocalTime.of(14,30,0));
-                assertEquals(LocalTime.of(14,30,0), aula.getHoraFim());
-                aula.setDataAula("2/12/2022");
-                assertEquals("2/12/2022", aula.getdData());
+                assertEquals("14:30", aula.getHoraFim());
+                aula.setDataAula(LocalDate.of(2022, 12, 2));
+                assertEquals(LocalDate.of(2022, 12, 2), aula.getData());
                 aula.setSala("AA2.25");
                 assertEquals("AA2.25", aula.getSala());
                 aula.setLotacaoDaSala(34);
                 assertEquals(34, aula.getLotacaoDaSala());
+                assertEquals("13:00", aula.getHoraInicioString());
+                assertEquals("2022-12-02", aula.getDataString());
             }
+	        
+	        @Test
+	        public void testDiaDaSemanaInt() {
+	            Aula aula = new Aula();
+	            assertEquals(1, aula.getdiaDaSemanaInt("Seg"));
+	            assertEquals(2, aula.getdiaDaSemanaInt("Ter"));
+	            assertEquals(3, aula.getdiaDaSemanaInt("Qua"));
+	            assertEquals(4, aula.getdiaDaSemanaInt("Qui"));
+	            assertEquals(5, aula.getdiaDaSemanaInt("Sex"));
+	            assertEquals(0, aula.getdiaDaSemanaInt("Dom"));
+	        }
+
 }

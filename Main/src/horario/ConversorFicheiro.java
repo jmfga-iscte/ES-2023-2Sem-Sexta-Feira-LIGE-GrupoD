@@ -76,11 +76,11 @@ public class ConversorFicheiro {
 		        String turma = obj.getString("Turma");
 		        int inscritos = obj.getInt("Inscritos no turno");
 		        String dds = obj.getString("Dia da semana");
-		        String hia = obj.getString("Hora inï¿½cio da aula");
+		        String hia = obj.getString("Hora início da aula");
 		        String hfa = obj.getString("Hora fim da aula");
 		        String data = obj.getString("Data da aula");
-		        String sala = obj.getString("Sala atribuï¿½da ï¿½ aula");
-		        int lotacao = obj.getInt("Lotaï¿½ï¿½o da sala");
+		        String sala = obj.getString("Sala atribuída à aula");
+		        int lotacao = obj.getInt("Lotação da sala");
 		        String[] record = {curso, uC, turno, turma, String.valueOf(inscritos), dds, hia, hfa, data, sala, String.valueOf(lotacao)};
 		        csvWriter.writeNext(record);
 		    }

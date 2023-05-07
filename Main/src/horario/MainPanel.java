@@ -33,16 +33,16 @@ public class MainPanel extends JPanel {
 	private static JFrame frameTabelaSobrepostas = new JFrame();
 	
 	private static List<String> listUC= new ArrayList<>();
-	private static List<String> selectedUC = new ArrayList<>();
+	static List<String> selectedUC = new ArrayList<>();
 	
-	private static List<Aula> duplicates = new ArrayList<>();
+	static List<Aula> duplicates = new ArrayList<>();
 	private static List<Aula> sobrelotadas = new ArrayList<>();
 	
 	private static List<JCheckBox> checkboxes = new ArrayList<>();
 	private static String pathAux = "";
 
 
-	private static void createWindow() {    
+	static void createWindow() {    
 		JFrame frame = new JFrame("Hor�rio");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		createGUI(frame);
@@ -395,7 +395,7 @@ public static void saveCsv(HorarioCarregado hc, String pathDestino){
 		try {
 			CSVWriter csvWriter = new CSVWriter(new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.UTF_8), ';', CSVWriter.DEFAULT_QUOTE_CHARACTER, CSVWriter.DEFAULT_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END);
 
-			String[] headers = {"Curso", "Unidade Curricular", "Turno", "Turma", "Inscritos no turno", "Dia da semana", "Hora in�cio da aula", "Hora fim da aula", "Data da aula", "Sala atribu�da � aula", "Lota��o da sala"};
+			String[] headers = {"Curso", "Unidade Curricular", "Turno", "Turma", "Inscritos no turno", "Dia da semana", "Hora inicio da aula", "Hora fim da aula", "Data da aula", "Sala atribuida a aula", "Lotacao da sala"};
 			csvWriter.writeNext(headers);
 
 			for (Aula aula : hc.getAulas()){

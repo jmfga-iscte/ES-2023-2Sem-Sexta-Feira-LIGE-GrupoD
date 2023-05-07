@@ -1,26 +1,14 @@
 package horario;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
-
-
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.client.methods.HttpGet;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
@@ -52,7 +40,7 @@ public class Horario extends HttpServlet{
 		request.setCharacterEncoding("UTF-8");
 		Part filePart = request.getPart("arquivo");
 		String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-		String caminhoArquivo = "E:\\IGE\\3ºAno_2ºSemestre\\EngenhariaSoftware\\Exemplos_Ficheiro" + fileName;
+		String caminhoArquivo = "C:/Users/Diogo/Desktop/a/" + fileName;
 
 		if(fileName.isEmpty()) {
 			request.setAttribute("mensagem", "Caminho do arquivo invalido.");
@@ -144,22 +132,6 @@ public class Horario extends HttpServlet{
 		return horario;
 	}
 
-	public static void loadHorario(String uri) throws IOException {
-		CloseableHttpClient httpClient = HttpClients.createDefault();
-		HttpGet request = new HttpGet(uri);
-		httpClient.execute(request, response -> {
-			InputStream inputStream = response.getEntity().getContent();
-		    // Ler o conteúdo do InputStream e imprimir na tela
-		    Scanner scanner = new Scanner(inputStream);
-		    while (scanner.hasNextLine()) {
-		        String line = scanner.nextLine();
-		        System.out.println(line);
-		    }
-		    scanner.close();
-			// Trate a resposta do servidor aqui
-			return null;
-		});
-	}
 
 	/**
 	 * 
@@ -215,6 +187,5 @@ public class Horario extends HttpServlet{
 
 
 	public static void main(String[] args) throws IOException {
-		carregar("E:\\IGE\\3ºAno_2ºSemestre\\EngenhariaSoftware\\Exemplos_Ficheiro\\horario_exemplo.csv");
 	}
 }

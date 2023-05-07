@@ -4,6 +4,6 @@ import org.junit.platform.suite.api.SelectClasses;
 import org.junit.runner.RunWith;
 
 @RunWith(JUnitPlatform.class)
-@SelectClasses({AulaTest.class, HorarioCarregadoTest.class, HorarioTest.class, ConversorFicheiroTest.class})
+@SelectClasses({AulaTest.class, HorarioCarregadoTest.class, HorarioTest.class, ConversorFicheiroTest.class, MainPanelTest.class})
 public class AllTests {
 }

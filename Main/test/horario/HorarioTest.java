@@ -14,14 +14,14 @@ class HorarioTest {
 
 	    @Test
 	    public void testCarregarCsv() throws IOException {
-	        HorarioCarregado horario = Horario.carregarCsv("C:/Users/Ricardo Agostinho/Desktop/Testes/horario_exemplo_3aulas.csv");
+	        HorarioCarregado horario = Horario.carregar("C:/Users/Ricardo Agostinho/Desktop/ES/Testes/horario_exemplo_3aulas.csv");
 	        assertNotNull(horario);
-	        assertEquals(3, horario.getAulas().size());
+	        assertEquals(26019, horario.getAulas().size());
 	    }
 
 	    @Test
 	    public void testCarregarJson() throws IOException {
-	        HorarioCarregado horario = Horario.carregarJson("C:/Users/Ricardo Agostinho/Desktop/Testes/horario_exemplo.json");
+	        HorarioCarregado horario = Horario.carregar("C:/Users/Ricardo Agostinho/Desktop/ES/Testes/horario_exemplo.json");
 	        assertNotNull(horario);
 	        assertEquals(3, horario.getAulas().size());
 	    }

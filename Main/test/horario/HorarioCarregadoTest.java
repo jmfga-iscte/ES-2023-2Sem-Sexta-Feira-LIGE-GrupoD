@@ -1,6 +1,4 @@
 package horario;
-import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -11,8 +9,6 @@ import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import horario.Aula;
-import horario.HorarioCarregado;
 
 class HorarioCarregadoTest {
 
@@ -68,5 +64,37 @@ class HorarioCarregadoTest {
         Assert.assertEquals(aula1, resultado.get(0));
         Assert.assertEquals(aula2, resultado.get(1));
     }
+    
+    @Test
+    public void testGetPath() {
+        // Cria um objeto HorarioCarregado
+        HorarioCarregado horario = new HorarioCarregado();
+
+        // Define um caminho de exemplo
+        String path = "/path/to/file.csv";
+
+        // Define o caminho no objeto HorarioCarregado
+        horario.setPath(path);
+
+        // Verifica se o caminho retornado é igual ao caminho definido
+        Assert.assertEquals(path, horario.getPath());
+    }
+    
+
+    @Test
+    public void testSetPath() {
+        // Cria um objeto HorarioCarregado
+        HorarioCarregado horario = new HorarioCarregado();
+
+        // Define um caminho de exemplo
+        String path = "/path/to/file.json";
+
+        // Define o caminho no objeto HorarioCarregado
+        horario.setPath(path);
+
+        // Verifica se o caminho definido é igual ao caminho retornado
+        Assert.assertEquals(path, horario.getPath());
+    }
+
 
 }

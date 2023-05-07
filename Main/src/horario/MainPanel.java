@@ -18,9 +18,12 @@ import javax.swing.table.DefaultTableModel;
 
 import com.opencsv.CSVWriter;
 
-
+/**
+ * A classe MainPanel é uma subclasse de JPanel e representa o painel principal da aplicação.
+ * Ele contém os componentes gráficos necessários para interagir com o usuário e exibir informações relevantes.
+ * É usado para exibir a interface gráfica da aplicação e responder aos eventos gerados pelos usuários.
+ */
 public class MainPanel extends JPanel {
-	
 	
 	private static int auxSobrepostas=0;
 	private static int auxSobrelotadas=0;
@@ -41,15 +44,28 @@ public class MainPanel extends JPanel {
 	private static List<JCheckBox> checkboxes = new ArrayList<>();
 	private static String pathAux = "";
 
+	/**
+	 * 
+	 * Cria uma nova janela da aplicação e exibe o painel principal.
+	 * 
+	 */
 
 	static void createWindow() {    
-		JFrame frame = new JFrame("Horï¿½rio");
+		JFrame frame = new JFrame("Horario");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		createGUI(frame);
 		frame.setSize(560, 200);      
 		frame.setLocationRelativeTo(null);  
 		frame.setVisible(true);
 	}
+	
+	/**
+	 * 
+	 * Este metodo cria uma GUI com varios botoes que posteriormente poderao ser usados tanto para carregar ficheiross, converter ficheiros,
+	 * criar horarios, ver aulas sobrepostas e aulas sobrelotadas.
+	 * 
+	 * @param frame a ser criado para a aplicacao
+	 */
 
 	public static void createGUI(final JFrame frame) {
 		JPanel panel = new JPanel();
@@ -57,9 +73,9 @@ public class MainPanel extends JPanel {
 		JPanel panelTableSobrepostas = new JPanel();
 		LayoutManager layout = new FlowLayout();  
 		panel.setLayout(layout);
-		JButton button1 = new JButton("Carregar horï¿½rio");
-		JButton button2 = new JButton("Converter horï¿½rio");
-		JButton button3 = new JButton("Criar horï¿½rio");
+		JButton button1 = new JButton("Carregar horario");
+		JButton button2 = new JButton("Converter horario");
+		JButton button3 = new JButton("Criar horario");
 		JButton button4 = new JButton("Ver aulas sobrepostas");
 		JButton button5 = new JButton("Ver sala sobrelotadas");
 		JButton button6 = new JButton("Exit");
@@ -108,7 +124,7 @@ public class MainPanel extends JPanel {
 					}
 				}
 				else {
-					label2.setText("Carregue um horï¿½rio primeiro!");
+					label2.setText("Carregue um horario primeiro!");
 				}
 			}
 		});
@@ -147,8 +163,8 @@ public class MainPanel extends JPanel {
 						topPanel.add(checkbox);
 					}
 
-					JButton button = new JButton("Criar Horï¿½rio");
-					JButton button2 = new JButton("Guardar Horï¿½rio Criado");
+					JButton button = new JButton("Criar Horario");
+					JButton button2 = new JButton("Guardar Horario Criado");
 					button.addActionListener(new ActionListener() {
 						@Override
 						public void actionPerformed(ActionEvent e) {
@@ -349,94 +365,132 @@ public class MainPanel extends JPanel {
 		panel.add(button6);
 		panel.add(label2);
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
-}
-
-public static void getSobrepostas(){
-		Map<String, Integer> countMap = new HashMap<>();
-	
-		// Conta a quantidade de ocorrï¿½ncias de cada hora de inï¿½cio na lista
-		for (Aula aula : carregado.getAulas()) {
-			String horaInicio = aula.getHoraInicioString();
-			countMap.put(horaInicio, countMap.getOrDefault(horaInicio, 0) + 1);
-		}
-	
-		// Adiciona as aulas com hora de inï¿½cio repetida ï¿½ lista de duplicatas
-		for (Aula aula : carregado.getAulas()) {
-			String horaInicio = aula.getHoraInicioString();
-			if (countMap.get(horaInicio) > 1) {
-				duplicates.add(aula);
-			}
-		}
-}
-
-public static void getSobrelotadas(){
-		for (Aula aula : carregado.getAulas()) {
-			if(aula.getInscritosNoTurno()>aula.getLotacaoDaSala()){
-				sobrelotadas.add(aula);
-			}
-		}
-}
-
-public static void addSelectedUC(String uc){
-	if (!selectedUC.contains(uc)){
-		selectedUC.add(uc);
 	}
-}
+	
+	/**
+	 * 
+	 * Este método recebe uma lista de aulas e identifica as aulas que possuem a mesma hora de início.
+	 * Em seguida, armazena essas aulas em uma lista de duplicadas.
+	 * 
+	 */
 
-public static void removeSelectedUC(String uc){
-	if (selectedUC.contains(uc)){
-		selectedUC.remove(uc);
-	}
-}
-
-public static void saveCsv(HorarioCarregado hc, String pathDestino){
-	File file = new File(pathDestino);
-	for (int i=0; i!=hc.getAulas().size(); i++) {
-		try {
-			CSVWriter csvWriter = new CSVWriter(new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.UTF_8), ';', CSVWriter.DEFAULT_QUOTE_CHARACTER, CSVWriter.DEFAULT_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END);
-
-			String[] headers = {"Curso", "Unidade Curricular", "Turno", "Turma", "Inscritos no turno", "Dia da semana", "Hora inicio da aula", "Hora fim da aula", "Data da aula", "Sala atribuida a aula", "Lotacao da sala"};
-			csvWriter.writeNext(headers);
-
-			for (Aula aula : hc.getAulas()){
-				String curso = aula.getCurso();
-				String uC = aula.getUnidadeCurricular();
-				String turno = aula.getTurno();
-				String turma = aula.getTurma();
-				int inscritos = aula.getInscritosNoTurno();
-				String dds = aula.getdiaDaSemana();
-				String hia = aula.getHoraInicioString();
-				String hfa = aula.getHoraFim();
-				String data = aula.getDataString();
-				String sala = aula.getSala();
-				int lotacao = aula.getLotacaoDaSala();
-				String[] record = {curso, uC, turno, turma, String.valueOf(inscritos), dds, hia, hfa, data, sala, String.valueOf(lotacao)};
-				csvWriter.writeNext(record);
+	public static void getSobrepostas(){
+			Map<String, Integer> countMap = new HashMap<>();
+			for (Aula aula : carregado.getAulas()) {
+				String horaInicio = aula.getHoraInicioString();
+				countMap.put(horaInicio, countMap.getOrDefault(horaInicio, 0) + 1);
 			}
+			for (Aula aula : carregado.getAulas()) {
+				String horaInicio = aula.getHoraInicioString();
+				if (countMap.get(horaInicio) > 1) {
+					duplicates.add(aula);
+				}
+			}
+	}
+	
+	/**
+	 * Identifica as aulas que estão sobrelotadas.
+	 * Uma aula está sobrelotada quando o número de inscritos no turno é maior do que a lotação da sala.
+	 * As aulas sobrelotadas são adicionadas à lista "sobrelotadas".
+	 */
 
+	public static void getSobrelotadas(){
+			for (Aula aula : carregado.getAulas()) {
+				if(aula.getInscritosNoTurno()>aula.getLotacaoDaSala()){
+					sobrelotadas.add(aula);
+				}
+			}
+	}
+	
+	/**
+	 * 
+	 * Adiciona uma unidade curricular selecionada à lista de UCs selecionadas, se ainda não estiver presente.
+	 * @param uc String contendo o código da unidade curricular a ser adicionada.
+	 * 
+	 */
+	
+	public static void addSelectedUC(String uc){
+		if (!selectedUC.contains(uc)){
+			selectedUC.add(uc);
+		}
+	}
+	
+	/**
+	 * 
+	 * Remove uma unidade curricular da lista de UCs selecionadas.
+	 * @param uc a unidade curricular a ser removida da lista.
+	 * 
+	 */
+	
+	public static void removeSelectedUC(String uc){
+		if (selectedUC.contains(uc)){
+			selectedUC.remove(uc);
+		}
+	}
+	
+	/**
+	 * 
+	 * Guarda os dados do horário carregado num ficheiro CSV no diretório especificado.
+	 * @param hc HorarioCarregado contendo os dados a serem gravados.
+	 * @param pathDestino Caminho do diretório de destino onde o ficheiro CSV será guardado.
+	 * 
+	 */
 
+	public static void saveCsv(HorarioCarregado hc, String pathDestino){
+		File file = new File(pathDestino);
+		for (int i=0; i!=hc.getAulas().size(); i++) {
 			try {
-				csvWriter.close();
-			} catch (IOException e) {
+				CSVWriter csvWriter = new CSVWriter(new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.UTF_8), ';', CSVWriter.DEFAULT_QUOTE_CHARACTER, CSVWriter.DEFAULT_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END);
+	
+				String[] headers = {"Curso", "Unidade Curricular", "Turno", "Turma", "Inscritos no turno", "Dia da semana", "Hora inicio da aula", "Hora fim da aula", "Data da aula", "Sala atribuida a aula", "Lotacao da sala"};
+				csvWriter.writeNext(headers);
+	
+				for (Aula aula : hc.getAulas()){
+					String curso = aula.getCurso();
+					String uC = aula.getUnidadeCurricular();
+					String turno = aula.getTurno();
+					String turma = aula.getTurma();
+					int inscritos = aula.getInscritosNoTurno();
+					String dds = aula.getdiaDaSemana();
+					String hia = aula.getHoraInicioString();
+					String hfa = aula.getHoraFim();
+					String data = aula.getDataString();
+					String sala = aula.getSala();
+					int lotacao = aula.getLotacaoDaSala();
+					String[] record = {curso, uC, turno, turma, String.valueOf(inscritos), dds, hia, hfa, data, sala, String.valueOf(lotacao)};
+					csvWriter.writeNext(record);
+				}
+	
+	
+				try {
+					csvWriter.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+		}
+		pathAux = pathDestino.substring(0, pathDestino.lastIndexOf("."));
+	}
+	
+	/**
+	 * 
+	 * Este método tem como objetivo criar uma lista das unidades curriculares presentes no horário carregado.
+	 * Para isso, percorre todas as aulas presentes no horário carregado e adiciona nessa lista de unidades curriculares 
+	 * apenas aquelas que ainda não foram adicionadas.
+	 * 
+	 */
+
+	public static void setListUC(){
+		for (int i=0; i!=carregado.getAulas().size(); i++) {
+			if (!listUC.contains(carregado.getAulas().get(i).getUnidadeCurricular())){
+				listUC.add(carregado.getAulas().get(i).getUnidadeCurricular());
+			}
 		}
 	}
-	pathAux = pathDestino.substring(0, pathDestino.lastIndexOf("."));
-}
 
-public static void setListUC(){
-	for (int i=0; i!=carregado.getAulas().size(); i++) {
-		if (!listUC.contains(carregado.getAulas().get(i).getUnidadeCurricular())){
-			listUC.add(carregado.getAulas().get(i).getUnidadeCurricular());
-		}
+	public static void main(String[] args) {
+		createWindow();
 	}
-}
-
-public static void main(String[] args) {
-
-	createWindow();
-}
 }

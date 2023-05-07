@@ -20,7 +20,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 
 /**
- * Representa um horario carregado a partir de um ficheiro JSON ou CSV.
+ * Classe que representa um horário.
+ * Esta classe estende a classe HttpServlet.
+ * 
  */
 
 @MultipartConfig(
@@ -34,6 +36,15 @@ public class Horario extends HttpServlet{
 
 
 	private static final ObjectMapper objectMapper = new ObjectMapper();
+	
+	/**
+	 * 
+	 * Método que processa uma requisição HTTP POST.
+	 * @param request Objeto HttpServletRequest contendo as informações da requisição HTTP.
+	 * @param response Objeto HttpServletResponse utilizado para enviar a resposta HTTP.
+	 * @throws IOException Exceção lançada caso ocorra algum erro de I/O durante o processamento da requisição.
+	 * 
+	 */
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

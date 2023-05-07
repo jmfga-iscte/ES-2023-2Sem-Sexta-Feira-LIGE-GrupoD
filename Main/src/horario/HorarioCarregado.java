@@ -22,13 +22,30 @@ public class HorarioCarregado {
 		this.aulas = aulas;
 	}
 
+	/**
+	 * Cria uma instância da classe HorarioCarregado.
+	 * Este construtor é vazio e não recebe nenhum argumento.
+	 */
+	
 	public HorarioCarregado() {
 
 	}
 	
+	/**
+	 * 
+	 * Método que retorna o caminho do ficheiro.
+	 * @return Uma String que representa o caminho do arquivo.
+	 */
+	
 	public String getPath() {
 		return path;
 	}
+	
+	/**
+	 * 
+	 * Método que atualiza o caminho do ficheiro.
+	 * @param path Uma String que representa o novo caminho do arquivo.
+	 */
 
 	public void setPath(String path) {
 		this.path = path;
@@ -36,7 +53,7 @@ public class HorarioCarregado {
 
 	/**
 	 * 
-	 * Mï¿½todo para obter a lista de aulas armazenadas no horario.
+	 * Metodo para obter a lista de aulas armazenadas no horario.
 	 * 
 	 * @return Lista de aulas.
 	 */

@@ -53,6 +53,12 @@ public class ConversorFicheiro {
 		}
 	}
 	
+	/**
+	*	Método que converte um arquivo JSON em um arquivo CSV.
+	*	@param pathOrigem O caminho completo para o arquivo JSON de origem a ser convertido.
+	*	@param pathDestino O caminho completo para o arquivo CSV de destino a ser gerado.
+	*	@throws JSONException Exceção lançada em caso de erro durante o parsing do JSON.
+	*/
 	
 	public static void convertJsonToCsv(String pathOrigem, String pathDestino) {
 		String jsonString;
@@ -95,6 +101,7 @@ public class ConversorFicheiro {
 		    System.out.println("Algum erro a ler o JSON.");
 		}
 	}
+	
 	/**
 	 * Converte um ficheiro CSV num ficheiro JSON. Este metodo le um ficheiro CSV do
 	 * caminho especificado pelo utilizador e converte o mesmo num ficheiro JSON, que e

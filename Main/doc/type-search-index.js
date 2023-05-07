@@ -1,1 +1,1 @@
-typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"<Unnamed>","l":"ConversorFicheiro"}];updateSearchResults();
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"horario","l":"AllTests"},{"p":"horario","l":"Aula"},{"p":"horario","l":"ConversorFicheiro"},{"p":"horario","l":"Horario"},{"p":"horario","l":"HorarioCarregado"},{"p":"horario","l":"MainPanel"}];updateSearchResults();

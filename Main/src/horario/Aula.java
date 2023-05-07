@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Representa uma aula associada a um determinado curso, unidade curricular e turno.
+ * Representa uma aula associada a um determinado curso e unidade curricular.
  */
 public class Aula {
 	@JsonProperty("Curso")
@@ -34,8 +34,8 @@ public class Aula {
 	private int LotacaoDaSala;
 
 	/**
-	 * Cria uma nova instï¿½ncia de Aula com valores padrï¿½o. Os valores padrï¿½o devem
-	 * ser definidos posteriormente usando os mï¿½todos setters.
+	 * Cria uma nova instancia de Aula com valores padrao. Os valores padrao devem
+	 * ser definidos posteriormente usando os metodos setters.
 	 */
 	public Aula() {
 
@@ -142,6 +142,13 @@ public class Aula {
 	public String getdiaDaSemana() {
 		return DiaDaSemana;
 	}
+	
+	/**
+	 * Método que retorna o valor numérico correspondente ao dia da semana especificado.
+	 * 
+	 * @param DiaDaSemana Uma String que representa o dia da semana a ser convertido em valor numérico.
+	 * @return Um inteiro que representa o valor numérico correspondente ao dia da semana. Retorna 0 se o dia da semana não for válido.
+	 */
 
 	public int getdiaDaSemanaInt(String DiaDaSemana){
 		switch(DiaDaSemana) {
@@ -177,6 +184,13 @@ public class Aula {
 	public LocalTime getHoraInicio() {
 		return HoraInicio;
 	}
+	
+	/**
+	 * 
+	 * Método que retorna a hora de início formatada como String.
+	 * 
+	 * @return Uma String que representa a hora de início do evento.
+	 */
 
 	public String getHoraInicioString() {
 		return HoraInicio.toString();
@@ -218,6 +232,12 @@ public class Aula {
 	public LocalDate getData() {
 		return Data;
 	}
+	
+	/**
+	 * 
+	 * Método que retorna a data formatada como String.
+	 * @return Uma String que representa a data do evento.
+	 */
 
 	public String getDataString() {
 		return Data.toString();

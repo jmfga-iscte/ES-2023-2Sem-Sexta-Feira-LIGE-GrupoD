@@ -27,7 +27,7 @@ public class Aula {
 	private LocalTime HoraFim;
 	@JsonProperty("Data da aula")
 	@JsonFormat(pattern = "dd/MM/yyyy")
-	private LocalDate Data;
+	public LocalDate Data;
 	@JsonProperty("Sala atribuída à aula")
 	private String Sala;
 	@JsonProperty("Lotação da sala")

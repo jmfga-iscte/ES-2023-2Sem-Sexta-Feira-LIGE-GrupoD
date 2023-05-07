@@ -56,7 +56,7 @@
 								<% // encontrar as aulas correspondentes a este horário e dia da semana
 									List<Aula> aulas = new ArrayList<>();
 									for (Aula a : horarioCarregado.getAulas()) {
-										if (a.getdiaDaSemanaInt( a.getdiaDaSemana() ) == j && a.getHoraInt(a.getHoraInicio() ) == i) {
+										if (a.getdiaDaSemanaInt( a.getdiaDaSemana() ) == j && a.getHoraInicio().getHour() == i) {
 											aulas.add(a);
 										}
 									}
